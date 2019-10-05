@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  app:
+    image: "repo.treescale.com/humbkr/superkluster_com:<TAG>"
+    restart: always
+    networks:
+      - web
+      - default
+    labels:
+      - "traefik.backend=superkluster_com"
+      - "traefik.frontend.rule=Host:superkluster.com"
+      - "traefik.docker.network=web"
+      - "traefik.port=3000"
+    container_name: superkluster_com
+
+networks:
+  web:
+    external: true
