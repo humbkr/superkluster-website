@@ -26,3 +26,7 @@ yarn-error.log*
 
 # IDE
 .idea
+
+# App
+/static/audio/**
+!/static/audio/.gitkeep

@@ -4,6 +4,8 @@ services:
   app:
     image: "repo.treescale.com/humbkr/superkluster_com:<TAG>"
     restart: always
+    volumes:
+      - ./volumes/static/audio:/app/static/audio
     networks:
       - web
       - default

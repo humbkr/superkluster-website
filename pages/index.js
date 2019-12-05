@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import devices from '../theme/breakpoints'
 
 export default () => (
-  <Teaser>
-    <Logo src="/static/images/logo.png" />
-  </Teaser>
+  <div>
+    <Teaser>
+      <Logo src="/static/images/logo.png" />
+    </Teaser>
+  </div>
 )
 
 const Teaser = styled.div`
@@ -17,6 +20,9 @@ const Teaser = styled.div`
 `
 const Logo = styled.img`
   margin-bottom: 20px;
-  width: 100%;
-  max-width: 600px;
+  max-width: 80%;
+
+  @media ${devices.tablet} {
+    max-width: 500px;
+  }
 `
