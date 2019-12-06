@@ -69,12 +69,24 @@ export default () => (
               https://www.facebook.com/julien.dirtygreed
             </a>
           </ContactItem>
-          <div>
+          <ContactItem>
             <h4>Mail</h4>
             <a href="mailto:superkluster.band@gmail.com">
               superkluster.band@gmail.com
             </a>
-          </div>
+          </ContactItem>
+          <ContactItem>
+            <h4>Annonce Zikinf</h4>
+            <a href="https://www.zikinf.com/annonces/annonce-1772138">
+              https://www.zikinf.com/annonces/annonce-1772138
+            </a>
+          </ContactItem>
+          <ContactItem>
+            <h4>Annonce Audiofanzine</h4>
+            <a href="https://fr.audiofanzine.com/annonces-musiciens/a.play,id.121711.html">
+              https://fr.audiofanzine.com/annonces-musiciens/a.play,id.121711.html
+            </a>
+          </ContactItem>
         </Contact>
       </Content>
     </Section>
