@@ -10,7 +10,7 @@ Send the image to the repository
 docker build . -trepo.treescale.com/humbkr/superkluster_com:<TAG>
 
 # Test
-docker run -i -pXXXX:3000 repo.treescale.com/humbkr/superkluster_com:1.0.0
+docker run -i -pXXXX:3000 repo.treescale.com/humbkr/superkluster_com:<TAG>
 
 # Push it to the treescale docker repository
 docker push repo.treescale.com/humbkr/superkluster_com:<TAG>

@@ -22,17 +22,11 @@ const Header = () => {
           <Link href="/">
             <NavElement onClick={() => setMenuIsOpen(false)}>Home</NavElement>
           </Link>
-          <Link href="/wewantyou/singer">
-            <NavElement onClick={() => setMenuIsOpen(false)}>We want you.</NavElement>
-          </Link>
         </NavMenu>
       </Nav>
       <NavDesktop>
         <Link href="/">
           <NavElement>Home</NavElement>
-        </Link>
-        <Link href="/wewantyou/singer">
-          <NavElement>We want you.</NavElement>
         </Link>
       </NavDesktop>
     </Container>

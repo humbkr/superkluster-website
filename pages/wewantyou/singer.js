@@ -31,7 +31,7 @@ export default () => (
       <Content>
         <div>
           <ul>
-            <li>Tu sais chanter juste et en rythme</li>
+            <li>Tu sais chanter juste, en rythme, et en anglais</li>
             <li>Tu sais aussi beugler quand il faut</li>
             <li>
               Tu veux faire de la scène et jouer avec des gens pas prise de tête
