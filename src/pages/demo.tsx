@@ -20,11 +20,11 @@ const playlist: PlaylistItem[] = [
 
 export default () => (
   <div>
-    {/*<PageHeader>*/}
-    {/*  <div />*/}
-    {/*  <PageTitle>We make FatCore</PageTitle>*/}
-    {/*  <ArrowDown src="/images/chevron-down.png" width={40} />*/}
-    {/*</PageHeader>*/}
+    <PageHeader>
+      <div />
+      <PageTitle>We make FatCore</PageTitle>
+      <ArrowDown src="/images/chevron-down.png" width={40} />
+    </PageHeader>
     <Section>
       <DemoHeader>
         <FancySeparator src="/images/fancy-separator.png" />

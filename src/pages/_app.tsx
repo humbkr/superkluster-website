@@ -1,59 +1,21 @@
 import React from 'react'
 import 'normalize.css'
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import theme from '@src/theme/default'
-import Header from '@src/components/layout/Header'
 
 function Superkluster({ Component, pageProps }) {
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <ParallaxWrapper>
-          <Parallax>
-            <Header />
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Component {...pageProps} />
-          </Parallax>
-        </ParallaxWrapper>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <Component {...pageProps} />
       </ThemeProvider>
     </>
   )
 }
 
 export default Superkluster
-
-const ParallaxWrapper = styled.div`
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  perspective: 2px;
-`
-
-const Parallax = styled.div`
-  height: 100vh;
-
-  ::after {
-    background-image: url(/images/supercluster.jpg);
-
-    /* Display and position the pseudo-element */
-    content: ' ';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    /* Move the pseudo-element back away from the camera,
-     * then scale it back up to fill the viewport.
-     * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
-    transform: translateZ(-1px) scale(1.5);
-    /* Force the background image to fill the whole element. */
-    background-size: 100%;
-    /* Keep the image from overlapping sibling elements. */
-    z-index: -1;
-  }
-`
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -130,8 +92,8 @@ const GlobalStyle = createGlobalStyle`
   }
   
   html {
-    background-color: ${theme.colors.background};
-    color: ${theme.colors.primary};
+    background-color: ${theme.colors.primary.background};
+    color: ${theme.colors.primary.text};
     font-size: 10px;
   }
 `

@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Link from 'next/link'
+import { Link, paths } from '@src/navigation'
 import devices, { deviceSizes } from '@src/theme/breakpoints'
 
-const Header = () => {
-  const [menuIsOpen, setMenuIsOpen] = useState(false)
+const Header: React.FC<{
+  noLogo: boolean
+}> = ({ noLogo = false }) => {
+  const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
 
   return (
     <Container>
       <div>
-        <Logo src="/images/logo.png" />
+        {!noLogo && <Logo src="/images/logo-text-narrow.png" alt="Superkluster" />}
       </div>
       <NavButton onClick={() => setMenuIsOpen(true)}>
         <i className="icon-menu" />
@@ -19,14 +21,26 @@ const Header = () => {
           <i className="icon-cancel" />
         </NavCloseButton>
         <NavMenu>
-          <Link href="/">
-            <NavElement onClick={() => setMenuIsOpen(false)}>Home</NavElement>
+          <Link href={paths.homepage}>
+            <NavElement>Accueil</NavElement>
+          </Link>
+          <Link href={paths.concerts}>
+            <NavElement>Concerts</NavElement>
+          </Link>
+          <Link href={paths.contact}>
+            <NavElement>Contact</NavElement>
           </Link>
         </NavMenu>
       </Nav>
       <NavDesktop>
-        <Link href="/">
-          <NavElement>Home</NavElement>
+        <Link href={paths.homepage}>
+          <NavElement>Accueil</NavElement>
+        </Link>
+        <Link href={paths.concerts}>
+          <NavElement>Concerts</NavElement>
+        </Link>
+        <Link href={paths.contact}>
+          <NavElement>Contact</NavElement>
         </Link>
       </NavDesktop>
     </Container>
@@ -35,16 +49,17 @@ const Header = () => {
 
 export default Header
 
-const Container = styled.div`
+const Container = styled.header`
   position: absolute;
   top: 0;
   width: 100%;
-  max-width: ${deviceSizes.laptopL};
+  max-width: ${deviceSizes.desktop};
   height: 80px;
   padding-left: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 100;
   
   @media ${devices.tablet} {
     height: 150px;
@@ -80,6 +95,12 @@ const Nav = styled.div`
   overflow-x: hidden;
   padding-top: 60px;
   transition: left .1s ease-out;
+  
+  a {
+    color: ${(props) => props.theme.text.color};
+    cursor: pointer;
+    text-decoration: none;
+  }
 `
 const NavCloseButton = styled.button`
   position: absolute;
@@ -94,10 +115,9 @@ const NavMenu = styled.div`
   flex-direction: column;
   padding: 20px 0 20px 20px;
 `
-const NavElement = styled.a`
+const NavElement = styled.span`
   font-size: 20px;
   font-weight: bold;
-  cursor: pointer;
   margin: 7px 0;
   padding: 5px 0;
   border-bottom: 1px solid ${(props) => props.theme.layout.separator.color};
@@ -107,9 +127,14 @@ const NavElement = styled.a`
     margin: 0 16px;
   }
 `
-
 const NavDesktop = styled.div`
   display: none;
+  
+  a {
+    color: ${(props) => props.theme.text.color};
+    cursor: pointer;
+    text-decoration: none;
+  }
   
   @media ${devices.tablet} {
     display: block;
