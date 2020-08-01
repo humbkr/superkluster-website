@@ -54,6 +54,12 @@ export default {
       navTitle: 'Navigation',
       friends: 'Friends',
     },
+    gdpr: {
+      text:
+        'This website use cookies to get statistical data such as the number of visits, visited pages, ... We do not use your data for marketing purposes.',
+      allow: 'Accept',
+      deny: 'Deny',
+    },
   },
   fr: {
     navigation: {
@@ -109,6 +115,12 @@ export default {
     footer: {
       navTitle: 'Navigation',
       friends: 'Les potes',
+    },
+    gdpr: {
+      text:
+        "Ce site utilise des cookies dans le but de récolter des données statistiques (nombre de visites, pages vues, ...) Nous n'utilisons pas vos données à des fins marketing.",
+      allow: 'Accepter',
+      deny: 'Refuser',
     },
   },
 }

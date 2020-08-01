@@ -6391,6 +6391,11 @@ react-dom@16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-facebook-pixel@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-facebook-pixel/-/react-facebook-pixel-1.0.3.tgz#d14988d983cfa5e638d30e559e7fc59d4e37b141"
+  integrity sha512-zVTo+D+vga2fTac98sf76bVhLfUzJ9WJXcpTYKWfEF0ZLH1p0PNWcZjTI0D09JBZZ+a12sqWSkbEqTYEkg49WQ==
+
 react-ga@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-3.1.2.tgz#e13f211c51a2e5c401ea69cf094b9501fe3c51ce"

@@ -2,6 +2,13 @@ import React from 'react'
 import 'normalize.css'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import theme from '@src/theme/default'
+import dynamic from 'next/dynamic'
+
+const Analytics = dynamic(
+  // @ts-ignore
+  () => import('@src/modules/analytics'),
+  { ssr: false }
+)
 
 function Superkluster({ Component, pageProps }) {
   return (
@@ -10,6 +17,7 @@ function Superkluster({ Component, pageProps }) {
         <GlobalStyle />
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
+        <Analytics />
       </ThemeProvider>
     </>
   )

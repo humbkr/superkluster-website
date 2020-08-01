@@ -1,13 +1,15 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import useTranslation from '@src/modules/i18n/useTranslation'
 import devices from '@src/theme/breakpoints'
-import gdpr, { UserPreferences } from './gdpr'
+import Button from '@src/components/common/Button'
+import gdpr from './gdpr'
+import { UserPreferences } from './types'
 
 /**
  * @return {null}
  */
-const CookiesBanner: FunctionComponent<{
+const CookiesBanner: React.FC<{
   alwaysDisplay?: boolean
   onAccept: (userPreferences: UserPreferences) => void
   onDeny: (userPreferences: UserPreferences) => void
@@ -72,9 +74,7 @@ const CookiesBanner: FunctionComponent<{
         <DenyButton type="button" onClick={onDenyPress}>
           {t('gdpr.deny')}
         </DenyButton>
-        <AcceptButton type="button" onClick={onAcceptPress}>
-          {t('gdpr.allow')}
-        </AcceptButton>
+        <Button onClick={onAcceptPress}>{t('gdpr.allow')}</Button>
       </Actions>
     </Container>
   )
@@ -94,12 +94,15 @@ const Container = styled.div`
   padding: 10px 15px;
   color: #fff;
   z-index: 500;
+  font-size: 1.6rem;
 `
 const Actions = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   @media ${devices.tablet} {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
   }
 `
 const AcceptButton = styled.button`
