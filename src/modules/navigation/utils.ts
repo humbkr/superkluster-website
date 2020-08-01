@@ -21,7 +21,10 @@ function getQuery(href: string, as: string = null): {} {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export function getLinkHref(href: string | HrefObject, as: string = null): {} {
+export function getLinkHref(
+  href: string | HrefObject,
+  as: string = null
+): HrefObject {
   let pathname: string
   let query = {}
 
@@ -36,7 +39,8 @@ export function getLinkHref(href: string | HrefObject, as: string = null): {} {
       const queryAs = getQuery(pathname, as)
       query = { ...query, ...queryAs }
     }
-  } else if (typeof href === 'string' && href && as) {
+  } else if (typeof href === 'string' && href) {
+    pathname = href
     query = getQuery(href, as)
   }
 

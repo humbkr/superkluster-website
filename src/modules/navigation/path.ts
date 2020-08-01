@@ -1,15 +1,19 @@
 const homepage = '/'
 const concerts = '/'
-const contact = '/'
+const contact = '/contact'
 const legals = '/'
 
-const instagram = 'https://www.facebook.com/superkluster'
+const api = {
+  sendMail: '/api/sendmail',
+}
+
+const instagram = 'https://www.instagram.com/superklusterband/'
 const youtube = '/'
 const bandcamp = 'https://superkluster.bandcamp.com'
 const facebook = 'https://www.facebook.com/superkluster'
 
 const friendsMCustom = 'https://mcustom-guitars.com'
-const friendsNewtt = 'https://www.facebook.com/NEwTTband/'
+const friendsRavenWhiteTattoo = 'https://www.instagram.com/raven_white_tattoo_/'
 const friendsDirtyGreed = 'https://dirtygreed.com'
 const friendsStudioCerisier = 'https://www.studioducerisier.com/'
 const friendsMuffDiver = 'https://www.facebook.com/muffd1verband/'
@@ -21,13 +25,15 @@ export default {
   contact,
   legals,
 
+  api,
+
   instagram,
   bandcamp,
   youtube,
   facebook,
 
   friendsMCustom,
-  friendsNewtt,
+  friendsRavenWhiteTattoo,
   friendsDirtyGreed,
   friendsStudioCerisier,
   friendsMuffDiver,

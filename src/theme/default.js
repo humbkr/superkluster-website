@@ -20,7 +20,11 @@ export default {
     },
   },
 
-  text: {
-    color: '#fff',
+  buttons: {
+    actionButton: {
+      backgroundColor: '#f5dfcc',
+      color: '#000',
+      height: '3.5rem',
+    },
   },
 }

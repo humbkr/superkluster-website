@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Link, paths } from '@src/navigation'
+import { Link, paths } from '@src/modules/navigation'
 import devices, { deviceSizes } from '@src/theme/breakpoints'
+import useTranslation from '@src/modules/i18n/useTranslation'
 
 const Header: React.FC<{
   noLogo: boolean
 }> = ({ noLogo = false }) => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
 
+  const { t } = useTranslation()
+
   return (
     <Container>
       <div>
-        {!noLogo && <Logo src="/images/logo-text-narrow.png" alt="Superkluster" />}
+        {!noLogo && (
+          <Logo src="/images/logo-text-narrow.png" alt="Superkluster" />
+        )}
       </div>
       <NavButton onClick={() => setMenuIsOpen(true)}>
         <i className="icon-menu" />
@@ -22,25 +27,25 @@ const Header: React.FC<{
         </NavCloseButton>
         <NavMenu>
           <Link href={paths.homepage}>
-            <NavElement>Accueil</NavElement>
+            <NavElement>{t('navigation.main.home')}</NavElement>
           </Link>
           <Link href={paths.concerts}>
-            <NavElement>Concerts</NavElement>
+            <NavElement>{t('navigation.main.live')}</NavElement>
           </Link>
           <Link href={paths.contact}>
-            <NavElement>Contact</NavElement>
+            <NavElement>{t('navigation.main.contact')}</NavElement>
           </Link>
         </NavMenu>
       </Nav>
       <NavDesktop>
         <Link href={paths.homepage}>
-          <NavElement>Accueil</NavElement>
+          <NavElement>{t('navigation.main.home')}</NavElement>
         </Link>
         <Link href={paths.concerts}>
-          <NavElement>Concerts</NavElement>
+          <NavElement>{t('navigation.main.live')}</NavElement>
         </Link>
         <Link href={paths.contact}>
-          <NavElement>Contact</NavElement>
+          <NavElement>{t('navigation.main.contact')}</NavElement>
         </Link>
       </NavDesktop>
     </Container>
@@ -60,7 +65,7 @@ const Container = styled.header`
   align-items: center;
   justify-content: space-between;
   z-index: 100;
-  
+
   @media ${devices.tablet} {
     height: 150px;
     padding: 0 50px;
@@ -68,7 +73,11 @@ const Container = styled.header`
 `
 
 const Logo = styled.img`
-  height: 50px;
+  height: 40px;
+
+  @media ${devices.tablet} {
+    height: 50px;
+  }
 `
 
 const NavButton = styled.button`
@@ -77,8 +86,8 @@ const NavButton = styled.button`
   padding: 20px 15px 20px 20px;
   font-size: 24px;
   margin-top: -5px;
-  color: ${(props) => props.theme.text.color};
-  
+  color: ${(props) => props.theme.colors.primary.text};
+
   @media ${devices.tablet} {
     display: none;
   }
@@ -90,14 +99,14 @@ const Nav = styled.div`
   position: fixed;
   z-index: 1;
   top: 0;
-  left: ${(props) => props.open ? '20%' : '100%'};
+  left: ${(props) => (props.open ? '20%' : '100%')};
   background-color: #000;
   overflow-x: hidden;
   padding-top: 60px;
-  transition: left .1s ease-out;
-  
+  transition: left 0.1s ease-out;
+
   a {
-    color: ${(props) => props.theme.text.color};
+    color: ${(props) => props.theme.colors.primary.text};
     cursor: pointer;
     text-decoration: none;
   }
@@ -108,7 +117,7 @@ const NavCloseButton = styled.button`
   right: 0;
   padding: 20px 15px 20px 20px;
   font-size: 26px;
-  color: ${(props) => props.theme.text.color};
+  color: ${(props) => props.theme.colors.primary.text};
 `
 const NavMenu = styled.div`
   display: flex;
@@ -121,7 +130,7 @@ const NavElement = styled.span`
   margin: 7px 0;
   padding: 5px 0;
   border-bottom: 1px solid ${(props) => props.theme.layout.separator.color};
-  
+
   @media ${devices.tablet} {
     border-bottom: none;
     margin: 0 16px;
@@ -129,13 +138,13 @@ const NavElement = styled.span`
 `
 const NavDesktop = styled.div`
   display: none;
-  
+
   a {
-    color: ${(props) => props.theme.text.color};
+    color: ${(props) => props.theme.colors.primary.text};
     cursor: pointer;
     text-decoration: none;
   }
-  
+
   @media ${devices.tablet} {
     display: block;
   }

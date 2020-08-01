@@ -1,4 +1,4 @@
 export interface HrefObject {
   pathname: string
-  query: string[]
+  query: {}
 }

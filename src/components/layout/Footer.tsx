@@ -1,46 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
 import SocialLinks from '@src/components/layout/SocialLinks'
-import { Link, paths } from '@src/navigation'
-import OutboundLink from '@src/analytics/OutboundLink'
+import { Link, paths } from '@src/modules/navigation'
+import OutboundLink from '@src/modules/analytics/OutboundLink'
 import devices from '@src/theme/breakpoints'
+import useTranslation from '@src/modules/i18n/useTranslation'
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation()
+
   return (
     <Container>
       <Content>
         <First>
-          <Logo src="/images/logo-text-wide.png" alt="Superkluster" />
+          <Logo src="/images/logo-text-wide.png" alt="SuperKluster" />
           <SocialLinks />
         </First>
         <Second>
           <div>
-            <Title>Navigation</Title>
+            <Title>{t('footer.navTitle')}</Title>
             <Ul>
               <li>
-                <Link href={paths.homepage}>
-                  Accueil
-                </Link>
+                <Link href={paths.homepage}>{t('navigation.main.home')}</Link>
               </li>
               <li>
-                <Link href={paths.concerts}>
-                  Concerts
-                </Link>
+                <Link href={paths.concerts}>{t('navigation.main.live')}</Link>
               </li>
               <li>
-                <Link href={paths.contact}>
-                  Contact
-                </Link>
+                <Link href={paths.contact}>{t('navigation.main.contact')}</Link>
               </li>
               <li>
-                <Link href={paths.legals}>
-                  Mentions légales
-                </Link>
+                <Link href={paths.legals}>{t('navigation.footer.legals')}</Link>
               </li>
             </Ul>
           </div>
           <Friends>
-            <Title>Les potes</Title>
+            <Title>{t('footer.friends')}</Title>
             <FriendsList>
               <Ul>
                 <li>
@@ -55,22 +50,12 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <OutboundLink
-                    to={paths.friendsNewtt}
-                    label="friends_newtt"
+                    to={paths.friendsSPCustom}
+                    label="friends_muffdiver"
                     target="_blank"
                     rel="noopener nofollow"
                   >
-                    Newtt
-                  </OutboundLink>
-                </li>
-                <li>
-                  <OutboundLink
-                    to={paths.friendsDirtyGreed}
-                    label="friends_dirtygreed"
-                    target="_blank"
-                    rel="noopener nofollow"
-                  >
-                    Dirty Greed
+                    SP Custom pickups
                   </OutboundLink>
                 </li>
                 <li>
@@ -83,8 +68,28 @@ const Footer: React.FC = () => {
                     Le studio du cerisier
                   </OutboundLink>
                 </li>
+                <li>
+                  <OutboundLink
+                    to={paths.friendsRavenWhiteTattoo}
+                    label="friends_ravenwhitetattoo"
+                    target="_blank"
+                    rel="noopener nofollow"
+                  >
+                    Raven White Tatoo
+                  </OutboundLink>
+                </li>
               </Ul>
               <Ul>
+                <li>
+                  <OutboundLink
+                    to={paths.friendsDirtyGreed}
+                    label="friends_dirtygreed"
+                    target="_blank"
+                    rel="noopener nofollow"
+                  >
+                    Dirty Greed
+                  </OutboundLink>
+                </li>
                 <li>
                   <OutboundLink
                     to={paths.friendsMuffDiver}
@@ -95,23 +100,11 @@ const Footer: React.FC = () => {
                     Muffdiver
                   </OutboundLink>
                 </li>
-                <li>
-                  <OutboundLink
-                    to={paths.friendsSPCustom}
-                    label="friends_muffdiver"
-                    target="_blank"
-                    rel="noopener nofollow"
-                  >
-                    SP Custom pickups
-                  </OutboundLink>
-                </li>
               </Ul>
             </FriendsList>
           </Friends>
         </Second>
-        <Third>
-          Copyright © {new Date().getFullYear()} Superkluster
-        </Third>
+        <Third>Copyright © {new Date().getFullYear()} SuperKluster</Third>
       </Content>
     </Container>
   )
@@ -134,13 +127,13 @@ const First = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid #575757;
   padding: 2.5rem 0 2.2rem;
-  
+
   @media ${devices.tablet} {
     flex-direction: initial;
     padding: 0 ${(props) => props.theme.layout.content.minSidePadding};
     min-height: 8rem;
   }
-  
+
   @media ${devices.laptop} {
     padding: 0;
   }
@@ -148,7 +141,7 @@ const First = styled.div`
 const Logo = styled.img`
   height: 2.5rem;
   margin-bottom: 2rem;
-  
+
   @media ${devices.tablet} {
     height: 3rem;
     margin-bottom: 0;
@@ -160,18 +153,18 @@ const Second = styled.div`
   flex-direction: column;
   align-items: flex-start;
   font-size: 2rem;
-  
+
   a {
-    color: ${(props) => props.theme.text.color};
+    color: ${(props) => props.theme.colors.primary.text};
     opacity: 0.6;
     cursor: pointer;
     text-decoration: none;
-    
+
     :hover {
       opacity: 1;
     }
   }
-  
+
   @media ${devices.tablet} {
     flex-direction: initial;
     font-size: 1.6rem;
@@ -179,11 +172,11 @@ const Second = styled.div`
 `
 const Ul = styled.ul`
   list-style-type: none;
-  
+
   li {
     margin-bottom: 1.2rem;
   }
-  
+
   @media ${devices.tablet} {
     li {
       margin-bottom: 1rem;
@@ -194,24 +187,24 @@ const Title = styled.h5`
   margin-bottom: 1.5rem;
   font-size: 2.2rem;
   font-weight: bold;
-  
+
   @media ${devices.tablet} {
     font-size: 1.8rem;
   }
 `
 const Friends = styled.div`
   margin-top: 3rem;
-  
+
   @media ${devices.tablet} {
     margin-left: 20rem;
     margin-top: 0;
-  }  
+  }
 `
 const FriendsList = styled.div`
   ul {
     margin-right: 3rem;
   }
-  
+
   @media ${devices.tablet} {
     display: flex;
   }

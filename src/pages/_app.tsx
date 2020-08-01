@@ -89,11 +89,21 @@ const GlobalStyle = createGlobalStyle`
   
   body {
     font-family: sans-serif;
+    height: 100%;
   }
   
   html {
     background-color: ${theme.colors.primary.background};
     color: ${theme.colors.primary.text};
     font-size: 10px;
+  }
+  
+  // react-simple-toasts
+  .toast-message {
+    > div {
+      background-color: rgba(255, 255, 255, 0.75);
+      color: #000;
+      border-radius: 7px;
+    }
   }
 `

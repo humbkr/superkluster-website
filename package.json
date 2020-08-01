@@ -7,18 +7,23 @@
     "build": "next build",
     "start": "next start",
     "eslint": "eslint src/",
-    "prettier": "prettier --check $PWD/'src/**/*.{js,jsx,ts,tsx,css,md}'",
-    "lint": "prettier-eslint --write $PWD/'src/**/*.{js,jsx,ts,tsx,css,md}'",
-    "lint-check": "prettier-eslint --list-different $PWD/'src/**/*.{js,jsx,ts,tsx,css,md}'"
+    "prettier": "prettier --check $PWD/'src/**/*.{js,jsx,ts,tsx,css}'",
+    "lint": "prettier-eslint --write $PWD/'src/**/*.{js,jsx,ts,tsx,css}'",
+    "lint-check": "prettier-eslint --list-different $PWD/'src/**/*.{js,jsx,ts,tsx,css}'"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.2.2",
+    "accept-language-parser": "^1.5.0",
+    "cookie": "^0.4.1",
     "i18n-js": "^3.7.0",
+    "joi": "^17.1.1",
     "next": "9.4.4",
     "normalize.css": "^8.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-ga": "^3.1.2",
     "react-howler": "^3.7.4",
+    "react-simple-toasts": "^1.1.2",
     "sitemap": "^6.1.5",
     "styled-components": "^5.1.1",
     "zlib": "^1.0.5"
@@ -32,7 +37,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,md}": [
+    "src/**/*.{js,jsx,ts,tsx,json,css}": [
       "eslint",
       "prettier-eslint --write"
     ]
