@@ -1,14 +1,14 @@
 import React, { useState, useRef } from 'react'
 import ReactHowler from 'react-howler'
 import styled from 'styled-components'
-import ProgressBar from '@src/components/player/ProgressBar'
-import PauseIcon from '@src/components/player/PauseIcon'
-import PlayIcon from '@src/components/player/PlayIcon'
-import SkipPrevIcon from '@src/components/player/SkipPrevIcon'
-import SkipNextIcon from '@src/components/player/SkipNextIcon'
 import { PlaylistItem } from '@src/types/Playlist'
-import { useInterval } from '@src/utils/timer'
-import Loader from '@src/components/player/Loader'
+import ProgressBar from './ProgressBar'
+import PauseIcon from './PauseIcon'
+import PlayIcon from './PlayIcon'
+import SkipPrevIcon from './SkipPrevIcon'
+import SkipNextIcon from './SkipNextIcon'
+import Loader from './Loader'
+import { useInterval } from './timer'
 
 const formatTime = (seconds: number) => {
   const floored = Math.floor(seconds)
@@ -28,7 +28,9 @@ const SimpleAudioPlayer: React.FC<{
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [position, setPosition] = useState(undefined)
   const [duration, setDuration] = useState<number>(0)
-  const [currentPlaylistPosition, setCurrentPlaylistPosition] = useState<number>(0)
+  const [currentPlaylistPosition, setCurrentPlaylistPosition] = useState<
+    number
+  >(0)
 
   const player = useRef<HTMLAudioElement>()
 
@@ -119,18 +121,31 @@ const SimpleAudioPlayer: React.FC<{
         <SongInfo>
           <SongTitle>{playlist[currentPlaylistPosition].title}</SongTitle>
           <SongPlaybackStatus>
-            {(isLoaded && position !== undefined) ? formatTime(position) : '00:00'}
+            {isLoaded && position !== undefined
+              ? formatTime(position)
+              : '00:00'}
             {' / '}
-            {(isLoaded && duration) ? formatTime(duration) : '00:00'}
+            {isLoaded && duration ? formatTime(duration) : '00:00'}
           </SongPlaybackStatus>
         </SongInfo>
         <ProgressBar current={position} max={duration} onSeek={handleOnSeek} />
         <Controls>
-          <Button type="button" onClick={handlePrev} disabled={currentPlaylistPosition === 0}>
+          <Button
+            type="button"
+            onClick={handlePrev}
+            disabled={currentPlaylistPosition === 0}
+          >
             <SkipPrevIcon enabled={currentPlaylistPosition > 0} size={18} />
           </Button>
-          <Button type="button" onClick={handleNext} disabled={currentPlaylistPosition === playlist.length - 1}>
-            <SkipNextIcon enabled={currentPlaylistPosition < playlist.length - 1} size={18} />
+          <Button
+            type="button"
+            onClick={handleNext}
+            disabled={currentPlaylistPosition === playlist.length - 1}
+          >
+            <SkipNextIcon
+              enabled={currentPlaylistPosition < playlist.length - 1}
+              size={18}
+            />
           </Button>
         </Controls>
       </Secondary>

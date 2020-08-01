@@ -66,7 +66,6 @@ const CookiesBanner: React.FC<{
   ) {
     return null
   }
-
   return (
     <Container>
       <p>{t('gdpr.text')}</p>

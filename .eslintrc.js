@@ -59,6 +59,7 @@ module.exports = {
     'no-debugger': 'error',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-multi-assign': ['error'],
+    'no-multi-spaces': 'warn',
     'no-negated-condition': 'off',
     'no-nested-ternary': 'error',
     'no-param-reassign': ['off'],

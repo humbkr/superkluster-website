@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 
 // eslint-disable-next-line import/prefer-default-export
-export const useInterval = (callback, delay) => {
-  const savedCallback = useRef()
+export const useInterval = (callback: any, delay: number) => {
+  const savedCallback = useRef<typeof callback>()
 
   // Remember the latest callback.
   useEffect(() => {

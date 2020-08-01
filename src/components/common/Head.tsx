@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from 'next/head'
-import useTranslation from '@src/modules/i18n/useTranslation'
 
 /**
  * Extends the Next Head component to automatically append common information.
@@ -9,8 +8,6 @@ const Head: React.FC<{
   title: string
   description: string
 }> = ({ title, description, children = '' }) => {
-  const { locale } = useTranslation()
-
   const pageTitle = `SuperKluster | ${title}`
 
   return (
@@ -18,10 +15,7 @@ const Head: React.FC<{
       <title>{pageTitle}</title>
       <meta name="description" content={description} />
 
-      <meta
-        property="og:url"
-        content={`${process.env.NEXT_PUBLIC_BASE_URL}/${locale}`}
-      />
+      <meta property="og:url" content={`${process.env.NEXT_PUBLIC_BASE_URL}`} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={description} />
@@ -30,7 +24,7 @@ const Head: React.FC<{
         content={`${process.env.NEXT_PUBLIC_BASE_URL}/images/share-picture.png`}
       />
       <meta name="twitter:card" content="summary_large_image" />
-      {/* <meta name="twitter:site" content="@AngelBike" /> */}
+      {/* <meta name="twitter:site" content="" /> */}
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={description} />
       <meta

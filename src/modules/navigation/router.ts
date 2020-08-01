@@ -1,13 +1,10 @@
 import NextRouter from 'next/router'
-import { getLinkHref } from './utils'
-import { HrefObject } from './types'
+import { UrlObject } from 'url'
 
-function push(url: string | HrefObject, as: string, options: {}) {
-  // Make I18nLink work with dynamic urls,
-  // @see https://github.com/isaachinman/next-i18next/issues/413
-  const finalHref = getLinkHref(url, as)
+declare type Url = string | UrlObject
 
-  return NextRouter.push(finalHref, as, options).then(() => {
+function push(url: Url, as: string, options: {}) {
+  return NextRouter.push(url, as, options).then(() => {
     if (window) {
       window.scrollTo(0, 0)
     }

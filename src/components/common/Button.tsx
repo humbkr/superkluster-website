@@ -2,11 +2,23 @@ import React from 'react'
 import styled from 'styled-components'
 import Loader from '@src/components/common/Loader'
 
-const Button: React.FC<{
+interface Props {
   loading?: boolean
   submitButton?: boolean
-}> = ({ loading = false, submitButton = false, children }) => (
-  <Container type={submitButton ? 'submit' : 'button'} disabled={loading}>
+}
+
+const Button: React.FC<Props & React.HTMLProps<HTMLButtonElement>> = ({
+  loading = false,
+  submitButton = false,
+  children,
+  ...props
+}) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Container
+    type={submitButton ? 'submit' : 'button'}
+    disabled={loading}
+    {...props}
+  >
     {loading && <Loader size={20} />}
     <Text>{children}</Text>
   </Container>
