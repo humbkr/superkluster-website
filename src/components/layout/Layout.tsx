@@ -68,14 +68,27 @@ const Parallax = styled(Section)`
 const ContentHeader = styled(Parallax)`
   ::after {
     top: -5rem;
-    background-image: url('/images/supercluster-bg-mobile.jpg');
+    background-image: url('${require('@public/images/supercluster-bg-mobile.jpg?webp')}');
   }
+  
+  // Safari only.
+  @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
+    ::after {
+      background-image: url('${require('@public/images/supercluster-bg-mobile.jpg')}');
+    }
+  }}
 
   @media ${devices.tablet} {
     ::after {
-      background-image: url('/images/supercluster-bg-desktop.jpg');
+      background-image: url('${require('@public/images/supercluster-bg-desktop.jpg?webp')}');
     }
-  }
+    
+    // Safari only.
+    @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
+      ::after {
+        background-image: url('${require('@public/images/supercluster-bg-desktop.jpg')}');
+      }
+    }}
 
   @media ${devices.desktop} {
     ::after {

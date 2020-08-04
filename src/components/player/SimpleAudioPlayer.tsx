@@ -100,6 +100,7 @@ const SimpleAudioPlayer: React.FC<{
   return (
     <Container>
       <ReactHowler
+        preload={false}
         src={[playlist[currentPlaylistPosition].url]}
         playing={isPlaying}
         onLoad={handleOnLoad}
@@ -113,7 +114,11 @@ const SimpleAudioPlayer: React.FC<{
         </PlayButton>
       )}
       {isLoaded && (
-        <PlayButton type="button" onClick={() => setIsPlaying(!isPlaying)}>
+        <PlayButton
+          type="button"
+          onClick={() => setIsPlaying(!isPlaying)}
+          aria-label="Play"
+        >
           <PlayPauseIcon size={40} />
         </PlayButton>
       )}
@@ -134,6 +139,7 @@ const SimpleAudioPlayer: React.FC<{
             type="button"
             onClick={handlePrev}
             disabled={currentPlaylistPosition === 0}
+            aria-label="Previous song"
           >
             <SkipPrevIcon enabled={currentPlaylistPosition > 0} size={18} />
           </Button>
@@ -141,6 +147,7 @@ const SimpleAudioPlayer: React.FC<{
             type="button"
             onClick={handleNext}
             disabled={currentPlaylistPosition === playlist.length - 1}
+            aria-label="Next song"
           >
             <SkipNextIcon
               enabled={currentPlaylistPosition < playlist.length - 1}
@@ -189,7 +196,7 @@ const SongTitle = styled.p`
 const SongPlaybackStatus = styled.p`
   font-size: 14px;
   line-height: 18px;
-  color: gray;
+  color: #686868;
   margin: 0 0 0 15px;
 `
 const Controls = styled.div`

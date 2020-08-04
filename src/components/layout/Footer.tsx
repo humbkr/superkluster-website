@@ -13,11 +13,24 @@ const Footer: React.FC = () => {
     <Container>
       <Content>
         <First>
-          <Logo src="/images/logo-text-wide.png" alt="SuperKluster" />
+          <picture>
+            <source
+              srcSet={require('@public/images/logo-text-wide.png?webp')}
+              type="image/webp"
+            />
+            <source
+              srcSet={require('@public/images/logo-text-wide.png')}
+              type="image/png"
+            />
+            <Logo
+              src={require('@public/images/logo-text-wide.png')}
+              alt="SuperKluster"
+            />
+          </picture>
           <SocialLinks />
         </First>
         <Second>
-          <div>
+          <nav>
             <Title>{t('footer.navTitle')}</Title>
             <Ul>
               <li>
@@ -33,7 +46,7 @@ const Footer: React.FC = () => {
                 <Link href={paths.legals}>{t('navigation.footer.legals')}</Link>
               </li>
             </Ul>
-          </div>
+          </nav>
           <Friends>
             <Title>{t('footer.friends')}</Title>
             <FriendsList>
@@ -183,7 +196,7 @@ const Ul = styled.ul`
     }
   }
 `
-const Title = styled.h5`
+const Title = styled.p`
   margin-bottom: 1.5rem;
   font-size: 2.2rem;
   font-weight: bold;

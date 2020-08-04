@@ -5,6 +5,8 @@ export default {
         home: 'Home',
         live: 'Live',
         contact: 'Contact',
+        openButton: 'Open navigation menu',
+        closeButton: 'Close navigation menu',
       },
       footer: {
         legals: 'Legals',
@@ -67,6 +69,8 @@ export default {
         home: 'Accueil',
         live: 'Concerts',
         contact: 'Contact',
+        openButton: 'Ouvrir le menu de navigation',
+        closeButton: 'Fermer le menu de navigation',
       },
       footer: {
         legals: 'Mentions légales',

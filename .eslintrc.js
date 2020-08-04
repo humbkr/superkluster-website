@@ -52,9 +52,11 @@ module.exports = {
     'import/export': 'error',
     'import/order': ['warn'],
     'import/first': ['off'],
-    'import/no-unresolved': ['error', { commonjs: true, caseSensitive: true }],
+    'import/no-unresolved': ['error', { commonjs: false, caseSensitive: true }],
     'import/no-duplicates': 'error',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    // Does not play well with requires in styled components.
+    'import/newline-after-import': ['off'],
     eqeqeq: ['error', 'always', { null: 'ignore' }],
     'no-debugger': 'error',
     'no-console': ['warn', { allow: ['warn', 'error'] }],

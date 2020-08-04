@@ -35,12 +35,35 @@ const Index: React.FC = () => {
         noLogo
         headerContent={(
           <BandName>
-            <LogoImage
-              src="/images/logo-image.png"
-              alt={t('home.logoImageAlt')}
-            />
+            <picture>
+              <source
+                srcSet={require('@public/images/logo-image.png?webp')}
+                type="image/webp"
+              />
+              <source
+                srcSet={require('@public/images/logo-image.png')}
+                type="image/png"
+              />
+              <LogoImage
+                src={require('@public/images/logo-image.png')}
+                alt={t('home.logoImageAlt')}
+              />
+            </picture>
             <H1>
-              <LogoText src="/images/logo-text-narrow.png" alt="SuperKluster" />
+              <picture>
+                <source
+                  srcSet={require('@public/images/logo-text-narrow.png?webp')}
+                  type="image/webp"
+                />
+                <source
+                  srcSet={require('@public/images/logo-text-narrow.png')}
+                  type="image/png"
+                />
+                <LogoText
+                  src={require('@public/images/logo-text-narrow.png')}
+                  alt="SuperKluster"
+                />
+              </picture>
             </H1>
           </BandName>
         )}
@@ -99,21 +122,36 @@ const LogoText = styled.img`
 const FatCore = styled(Section)`
   height: 35rem;
   background-color: ${(props) => props.theme.colors.primary.background};
-  background-image: url('/images/home/band-small.jpg');
+  background-image: url('${require('@public/images/home/band-small.jpg?webp')}');
   background-repeat: no-repeat;
   background-size: 100%;
   filter: grayscale(100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  // Safari only.
+  @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
+    background-image: url('${require('@public/images/home/band-small.jpg')}');
+  }}
 
   @media ${devices.tablet} {
-    background-image: url('/images/home/band-medium.jpg');
+    background-image: url('${require('@public/images/home/band-medium.jpg?webp')}');
     height: 50rem;
+    
+    // Safari only.
+    @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
+      background-image: url('${require('@public/images/home/band-medium.jpg')}');
+    }}
   }
 
   @media ${devices.laptop} {
-    background-image: url('/images/home/band-large.jpg');
+    background-image: url('${require('@public/images/home/band-large.jpg?webp')}');
+    
+    // Safari only.
+    @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
+      background-image: url('${require('@public/images/home/band-large.jpg')}');
+    }}
   }
 `
 const H2 = styled.h2`
@@ -134,6 +172,7 @@ const Music = styled.section`
   padding: 3rem ${(props) => props.theme.layout.minSidePadding};
 
   @supports not (-webkit-touch-callout: none) {
+    // CSS for all browser except Safari IOS.
     ::after {
       /* Display and position the pseudo-element */
       content: ' ';
@@ -144,17 +183,24 @@ const Music = styled.section`
       left: 0;
       transform: translateZ(-1px) scale(2.5);
       background-color: ${(props) => props.theme.colors.accentTypeOne.background};
-      background-image: url('/images/grunge-texture.png');
+      background-image: url('${require('@public/images/grunge-texture.png?webp')}');
       background-size: cover;
       z-index: -1;
     }
+    
+    // Safari only.
+    @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
+      ::after {
+        background-image: url('${require('@public/images/grunge-texture.png')}');
+      }
+    }}
   }
 
   @supports (-webkit-touch-callout: none) {
     // CSS specific to iOS devices.
     // Parallax effects are broken since ios 13.
     background-color: ${(props) => props.theme.colors.accentTypeOne.background};
-    background-image: url('/images/grunge-texture.png');
+    background-image: url('${require('@public/images/grunge-texture.png')}');
   }
 
   @media ${devices.tablet} {

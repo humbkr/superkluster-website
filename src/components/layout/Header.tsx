@@ -15,14 +15,33 @@ const Header: React.FC<{
     <Container>
       <div>
         {!noLogo && (
-          <Logo src="/images/logo-text-narrow.png" alt="Superkluster" />
+          <picture>
+            <source
+              srcSet={require('@public/images/logo-text-narrow.png?webp')}
+              type="image/webp"
+            />
+            <source
+              srcSet={require('@public/images/logo-text-narrow.png')}
+              type="image/png"
+            />
+            <Logo
+              src={require('@public/images/logo-text-narrow.png')}
+              alt="SuperKluster"
+            />
+          </picture>
         )}
       </div>
-      <NavButton onClick={() => setMenuIsOpen(true)}>
+      <NavButton
+        onClick={() => setMenuIsOpen(true)}
+        aria-label={t('navigation.main.openButton')}
+      >
         <i className="icon-menu" />
       </NavButton>
       <Nav open={menuIsOpen}>
-        <NavCloseButton onClick={() => setMenuIsOpen(false)}>
+        <NavCloseButton
+          onClick={() => setMenuIsOpen(false)}
+          aria-label={t('navigation.main.closeButton')}
+        >
           <i className="icon-cancel" />
         </NavCloseButton>
         <NavMenu>

@@ -11,7 +11,8 @@ const ProgressBar: React.FC<{
 
   const handleOnClick = (e) => {
     // Get clicked position from the button point of view.
-    const percent = (e.clientX - container.current.getBoundingClientRect().left) / container.current.offsetWidth
+    const percent = (e.clientX - container.current.getBoundingClientRect().left)
+      / container.current.offsetWidth
     onSeek(percent * max)
   }
 
@@ -19,6 +20,7 @@ const ProgressBar: React.FC<{
     <Container
       ref={container}
       onClick={handleOnClick}
+      aria-label="Progress bar"
     >
       <Progress style={{ width: `${processedCurrent}%` }} />
     </Container>
