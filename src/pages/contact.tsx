@@ -125,7 +125,7 @@ const TitleSection = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 50vh;
+  height: 60vh;
 `
 const H1 = styled.h1`
   text-align: center;

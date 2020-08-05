@@ -100,7 +100,6 @@ const SimpleAudioPlayer: React.FC<{
   return (
     <Container>
       <ReactHowler
-        preload={false}
         src={[playlist[currentPlaylistPosition].url]}
         playing={isPlaying}
         onLoad={handleOnLoad}

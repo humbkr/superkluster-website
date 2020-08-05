@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link, paths } from '@src/modules/navigation'
 import devices, { deviceSizes } from '@src/theme/breakpoints'
 import useTranslation from '@src/modules/i18n/useTranslation'
+import NavMenuOverlay from '@src/components/layout/NavMenuOverlay'
 
 const Header: React.FC<{
   noLogo: boolean
@@ -37,25 +38,10 @@ const Header: React.FC<{
       >
         <i className="icon-menu" />
       </NavButton>
-      <Nav open={menuIsOpen}>
-        <NavCloseButton
-          onClick={() => setMenuIsOpen(false)}
-          aria-label={t('navigation.main.closeButton')}
-        >
-          <i className="icon-cancel" />
-        </NavCloseButton>
-        <NavMenu>
-          <Link href={paths.homepage}>
-            <NavElement>{t('navigation.main.home')}</NavElement>
-          </Link>
-          <Link href={paths.concerts}>
-            <NavElement>{t('navigation.main.live')}</NavElement>
-          </Link>
-          <Link href={paths.contact}>
-            <NavElement>{t('navigation.main.contact')}</NavElement>
-          </Link>
-        </NavMenu>
-      </Nav>
+      <NavMenuOverlay
+        isOpen={menuIsOpen}
+        closeMenu={() => setMenuIsOpen(false)}
+      />
       <NavDesktop>
         <Link href={paths.homepage}>
           <NavElement>{t('navigation.main.home')}</NavElement>
@@ -78,51 +64,51 @@ const Container = styled.header`
   top: 0;
   width: 100%;
   max-width: ${deviceSizes.desktop};
-  height: 80px;
-  padding-left: 20px;
+  height: 8rem;
+  padding-left: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 100;
 
   @media ${devices.tablet} {
-    height: 150px;
-    padding: 0 50px;
+    height: 15rem;
+    padding: 0 5rem;
   }
 `
 
 const Logo = styled.img`
-  height: 40px;
+  height: 4rem;
 
   @media ${devices.tablet} {
-    height: 50px;
+    height: 5rem;
   }
 `
 
 const NavButton = styled.button`
   border: none;
   background-color: transparent;
-  padding: 20px 15px 20px 20px;
-  font-size: 24px;
-  margin-top: -5px;
+  padding: 2rem;
+  font-size: 2.4rem;
+  margin-top: -0.5rem;
   color: ${(props) => props.theme.colors.primary.text};
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
 
   @media ${devices.tablet} {
     display: none;
   }
 `
 
-const Nav = styled.div`
-  height: 100%;
-  width: 80%;
+const NavOverlay = styled.div`
+  height: 100vh;
+  width: 100%;
   position: fixed;
-  z-index: 1;
+  z-index: ${(props) => (props.open ? '1' : '-10')};
   top: 0;
-  left: ${(props) => (props.open ? '20%' : '100%')};
-  background-color: #000;
+  left: 0;
+  background: rgba(0, 0, 0, ${(props) => (props.open ? '0.5' : '0')});
   overflow-x: hidden;
-  padding-top: 60px;
-  transition: left 0.1s ease-out;
+  transition: background 0.1s ease-out;
 
   a {
     color: ${(props) => props.theme.colors.primary.text};
@@ -130,29 +116,45 @@ const Nav = styled.div`
     text-decoration: none;
   }
 `
-const NavCloseButton = styled.button`
-  position: absolute;
+const NavContent = styled.div`
+  height: 100vh;
+  width: 80%;
+  position: fixed;
+  z-index: 2;
   top: 0;
-  right: 0;
-  padding: 20px 15px 20px 20px;
-  font-size: 26px;
+  left: ${(props) => (props.open ? '20%' : '100%')};
+  background-color: ${(props) => props.theme.colors.primary.background};
+  overflow-x: hidden;
+  padding-top: 6rem;
+  transition: left 0.1s ease-out;
+`
+const NavCloseButton = styled.button`
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 0.2rem;
+  right: -0.2rem;
+  padding: 2rem;
+  font-size: 2.6rem;
   color: ${(props) => props.theme.colors.primary.text};
 `
 const NavMenu = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 0 20px 20px;
+  padding: 2rem 0 2rem 2rem;
 `
-const NavElement = styled.span`
-  font-size: 20px;
+const NavElement = styled.div`
+  font-size: 2.2rem;
   font-weight: bold;
-  margin: 7px 0;
-  padding: 5px 0;
+  margin: 0.7rem;
+  padding: 0.5rem 0;
   border-bottom: 1px solid ${(props) => props.theme.layout.separator.color};
 
   @media ${devices.tablet} {
     border-bottom: none;
-    margin: 0 16px;
+    margin: 0 1.6rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
+    display: inline-block;
   }
 `
 const NavDesktop = styled.div`
