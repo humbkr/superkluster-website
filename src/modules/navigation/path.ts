@@ -18,6 +18,7 @@ const friendsDirtyGreed = 'https://dirtygreed.com'
 const friendsStudioCerisier = 'https://www.studioducerisier.com/'
 const friendsMuffDiver = 'https://www.facebook.com/muffd1verband/'
 const friendsSPCustom = 'http://sp-custom.com/'
+const friendsNewtt = 'https://www.facebook.com/NEwTTband/'
 
 export default {
   homepage,
@@ -38,4 +39,5 @@ export default {
   friendsStudioCerisier,
   friendsMuffDiver,
   friendsSPCustom,
+  friendsNewtt,
 }

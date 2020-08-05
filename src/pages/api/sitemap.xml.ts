@@ -10,7 +10,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     // Set response header
     res.setHeader('content-type', 'application/xml')
     res.setHeader('Content-Encoding', 'gzip')
-
     // A Transform for turning a Readable stream of either SitemapItemOptions or url strings
     // into a Sitemap. The readable stream it transforms must be in object mode.
     const smStream = new SitemapStream({

@@ -5,8 +5,6 @@ import SendGrid from '@sendgrid/mail'
 SendGrid.setApiKey(process.env.SENDGRID_API_KEY)
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(req)
-
   // Validate request.
   const schema = Joi.object({
     email: Joi.string().email().required(),

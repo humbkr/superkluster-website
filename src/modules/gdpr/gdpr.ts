@@ -1,7 +1,7 @@
 import { serialize, parse } from 'cookie'
 import { CookieOptions, UserPreferences } from '@src/modules/gdpr/types'
 
-const COOKIE_NAME = 'gdpr-acceptance'
+const COOKIE_NAME_PREFIX = 'gdpr-'
 
 // By default no cookies except the required ones must be set.
 const DEFAULT_VALUES: UserPreferences = {
@@ -47,8 +47,8 @@ const getUserPreferences = () => {
   // Read cookies and get values.
   if (document) {
     const cookies = parse(document.cookie)
-    if (cookies[COOKIE_NAME]) {
-      preferences = JSON.parse(cookies[COOKIE_NAME])
+    if (cookies[`${COOKIE_NAME_PREFIX}consent`]) {
+      preferences = JSON.parse(cookies[`${COOKIE_NAME_PREFIX}consent`])
     }
   }
 
@@ -56,18 +56,56 @@ const getUserPreferences = () => {
 }
 
 const setUserPreferences = (preferences: UserPreferences) => {
-  // Set cookie that will expire in one year, per legal requirements.
+  // Set cookies that will expire in one year, per legal requirements.
+  // One global cookie for use on client side.
+  // One cookie per preference so they can be easily used in GTM.
   if (document) {
-    document.cookie = serializeCookie(COOKIE_NAME, preferences, {
-      maxAge: 31536000,
-      path: '/',
-    })
+    document.cookie = serializeCookie(
+      `${COOKIE_NAME_PREFIX}consent`,
+      preferences,
+      {
+        maxAge: 31536000,
+        path: '/',
+      }
+    )
+    document.cookie = serializeCookie(
+      `${COOKIE_NAME_PREFIX}necessary`,
+      preferences.necessary,
+      {
+        maxAge: 31536000,
+        path: '/',
+      }
+    )
+    document.cookie = serializeCookie(
+      `${COOKIE_NAME_PREFIX}preferences`,
+      preferences.preferences,
+      {
+        maxAge: 31536000,
+        path: '/',
+      }
+    )
+    document.cookie = serializeCookie(
+      `${COOKIE_NAME_PREFIX}statistics`,
+      preferences.statistics,
+      {
+        maxAge: 31536000,
+        path: '/',
+      }
+    )
+    document.cookie = serializeCookie(
+      `${COOKIE_NAME_PREFIX}marketing`,
+      preferences.marketing,
+      {
+        maxAge: 31536000,
+        path: '/',
+      }
+    )
   }
 }
 
 export default {
   removeCookie,
-  COOKIE_NAME,
+  COOKIE_NAME_PREFIX,
   DEFAULT_VALUES,
   getUserPreferences,
   setUserPreferences,

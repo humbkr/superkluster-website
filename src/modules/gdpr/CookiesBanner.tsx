@@ -11,9 +11,13 @@ import { UserPreferences } from './types'
  */
 const CookiesBanner: React.FC<{
   alwaysDisplay?: boolean
-  onAccept: (userPreferences: UserPreferences) => void
-  onDeny: (userPreferences: UserPreferences) => void
-}> = ({ alwaysDisplay, onAccept, onDeny }) => {
+  onAccept?: (userPreferences: UserPreferences) => void
+  onDeny?: (userPreferences: UserPreferences) => void
+}> = ({
+  alwaysDisplay = false,
+  onAccept = () => null,
+  onDeny = () => null,
+}) => {
   const { t } = useTranslation()
   const [userPreferences, setUserPreferences] = useState(null)
 
@@ -103,15 +107,6 @@ const Actions = styled.div`
   @media ${devices.tablet} {
     flex-direction: row;
   }
-`
-const AcceptButton = styled.button`
-  padding: 10px;
-  border: 0;
-  background-color: #3b5dc0;
-  cursor: pointer;
-  border-radius: 7px;
-  color: #fff;
-  font-weight: bold;
 `
 const DenyButton = styled.button`
   padding: 10px;

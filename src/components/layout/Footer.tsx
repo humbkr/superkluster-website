@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import SocialLinks from '@src/components/layout/SocialLinks'
 import { Link, paths } from '@src/modules/navigation'
-import OutboundLink from '@src/modules/analytics/OutboundLink'
 import devices from '@src/theme/breakpoints'
 import useTranslation from '@src/modules/i18n/useTranslation'
 
@@ -52,66 +51,76 @@ const Footer: React.FC = () => {
             <FriendsList>
               <Ul>
                 <li>
-                  <OutboundLink
-                    to={paths.friendsMCustom}
-                    label="friends_mcustom"
+                  <a
+                    href={paths.friendsMCustom}
+                    id="extlink-mcustom"
                     target="_blank"
-                    rel="noopener nofollow"
+                    rel="noopener nofollow noreferrer"
                   >
                     M Custom guitars
-                  </OutboundLink>
+                  </a>
                 </li>
                 <li>
-                  <OutboundLink
-                    to={paths.friendsSPCustom}
-                    label="friends_muffdiver"
+                  <a
+                    href={paths.friendsSPCustom}
+                    id="extlink-spcustom"
                     target="_blank"
-                    rel="noopener nofollow"
+                    rel="noopener nofollow noreferrer"
                   >
                     SP Custom pickups
-                  </OutboundLink>
+                  </a>
                 </li>
                 <li>
-                  <OutboundLink
-                    to={paths.friendsStudioCerisier}
-                    label="friends_studiocerisier"
+                  <a
+                    href={paths.friendsStudioCerisier}
+                    id="extlink-studiocerisier"
                     target="_blank"
-                    rel="noopener nofollow"
+                    rel="noopener nofollow noreferrer"
                   >
                     Le studio du cerisier
-                  </OutboundLink>
+                  </a>
                 </li>
                 <li>
-                  <OutboundLink
-                    to={paths.friendsRavenWhiteTattoo}
-                    label="friends_ravenwhitetattoo"
+                  <a
+                    href={paths.friendsRavenWhiteTattoo}
+                    id="extlink-ravenwhitetattoo"
                     target="_blank"
-                    rel="noopener nofollow"
+                    rel="noopener nofollow noreferrer"
                   >
                     Raven White Tatoo
-                  </OutboundLink>
+                  </a>
                 </li>
               </Ul>
               <Ul>
                 <li>
-                  <OutboundLink
-                    to={paths.friendsDirtyGreed}
-                    label="friends_dirtygreed"
+                  <a
+                    href={paths.friendsDirtyGreed}
+                    id="extlink-dirtygreed"
                     target="_blank"
-                    rel="noopener nofollow"
+                    rel="noopener nofollow noreferrer"
                   >
                     Dirty Greed
-                  </OutboundLink>
+                  </a>
                 </li>
                 <li>
-                  <OutboundLink
-                    to={paths.friendsMuffDiver}
-                    label="friends_muffdiver"
+                  <a
+                    href={paths.friendsMuffDiver}
+                    id="extlink-muffdiver"
                     target="_blank"
-                    rel="noopener nofollow"
+                    rel="noopener nofollow noreferrer"
                   >
                     Muffdiver
-                  </OutboundLink>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={paths.friendsNewtt}
+                    id="extlink-newtt"
+                    target="_blank"
+                    rel="noopener nofollow noreferrer"
+                  >
+                    Newtt
+                  </a>
                 </li>
               </Ul>
             </FriendsList>
