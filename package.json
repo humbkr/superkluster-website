@@ -29,6 +29,8 @@
     "react-dom": "16.13.1",
     "react-howler": "^3.7.4",
     "react-simple-toasts": "^1.1.2",
+    "react-use-audio-player": "^0.0.18",
+    "react-use-dimensions": "^1.2.1",
     "sitemap": "^6.1.5",
     "styled-components": "^5.1.1",
     "webp-loader": "^0.6.0",

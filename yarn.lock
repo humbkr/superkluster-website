@@ -5072,7 +5072,7 @@ hosted-git-info@^2.1.4:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.8.tgz#7539bd4bc1e0e0a895815a2e0262420b12858488"
   integrity sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==
 
-howler@^2.1.1:
+howler@^2.1.1, howler@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/howler/-/howler-2.2.0.tgz#0e2c780997ae65ab9a1a186333031beac1c63c6b"
   integrity sha512-sGPkrAQy7jh5mNDbkRNG0F82R2HFDYNsQXBcX4smXQT0y0F4UMsa/+jXaGwWvcrajWr2tDB7JUkH7G5qSnuIyQ==
@@ -8144,6 +8144,18 @@ react-simple-toasts@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/react-simple-toasts/-/react-simple-toasts-1.1.2.tgz#c11e6a14519b898d15036fd8bbdb801e508ea82c"
   integrity sha512-yCnGOZBnwf4V6lUQ2GnvnN2cxkIBwZx6xgG6LeWTSUJ5x/m87XmmljdeiSJCzaqfBg9Yzr/s3d0XUX2R+08B5g==
+
+react-use-audio-player@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/react-use-audio-player/-/react-use-audio-player-0.0.18.tgz#fe9be2cb9b11d6a81d328efa30e01c7c9f8263d8"
+  integrity sha512-wMu0m89i+euBernV5HShc9BzwM/lAv5PMIRI5gwKZ3dZ+8VMH8NbB3cqNvGmUWwQbWgE4E8dW/eK+ItDdR15kg==
+  dependencies:
+    howler "^2.2.0"
+
+react-use-dimensions@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-use-dimensions/-/react-use-dimensions-1.2.1.tgz#eb1561db7b06c393209d2bffa449931dd93f7870"
+  integrity sha512-XL+Rup9Hosxx3Ap9xpyQMbVwuUa4BSqiOjfBb2zDuGs4uv2FesFV+m8Z/huRx2BNptMd9ARPqFuSNA62zhCozg==
 
 react@16.13.1:
   version "16.13.1"
