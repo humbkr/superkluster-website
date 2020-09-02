@@ -6,7 +6,7 @@ import useTranslation from '@src/modules/i18n/useTranslation'
 import NavMenuOverlay from '@src/components/layout/NavMenuOverlay'
 
 const Header: React.FC<{
-  noLogo: boolean
+  noLogo?: boolean
 }> = ({ noLogo = false }) => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
 
@@ -16,7 +16,7 @@ const Header: React.FC<{
     <Container>
       <div>
         {!noLogo && (
-          <picture>
+          <picture data-testid="header-band-logo">
             <source
               srcSet={require('@public/images/logo-text-narrow.png?webp')}
               type="image/webp"
@@ -35,6 +35,7 @@ const Header: React.FC<{
       <NavButton
         onClick={() => setMenuIsOpen(true)}
         aria-label={t('navigation.main.openButton')}
+        data-testid="header-main-menu-button"
       >
         <i className="icon-menu" />
       </NavButton>
@@ -42,7 +43,7 @@ const Header: React.FC<{
         isOpen={menuIsOpen}
         closeMenu={() => setMenuIsOpen(false)}
       />
-      <NavDesktop>
+      <NavDesktop data-testid="header-menu-desktop">
         <Link href={paths.homepage}>
           <NavElement>{t('navigation.main.home')}</NavElement>
         </Link>
@@ -76,7 +77,6 @@ const Container = styled.header`
     padding: 0 5rem;
   }
 `
-
 const Logo = styled.img`
   height: 4rem;
 
@@ -84,7 +84,6 @@ const Logo = styled.img`
     height: 5rem;
   }
 `
-
 const NavButton = styled.button`
   border: none;
   background-color: transparent;
@@ -97,51 +96,6 @@ const NavButton = styled.button`
   @media ${devices.tablet} {
     display: none;
   }
-`
-
-const NavOverlay = styled.div`
-  height: 100vh;
-  width: 100%;
-  position: fixed;
-  z-index: ${(props) => (props.open ? '1' : '-10')};
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, ${(props) => (props.open ? '0.5' : '0')});
-  overflow-x: hidden;
-  transition: background 0.1s ease-out;
-
-  a {
-    color: ${(props) => props.theme.colors.primary.text};
-    cursor: pointer;
-    text-decoration: none;
-  }
-`
-const NavContent = styled.div`
-  height: 100vh;
-  width: 80%;
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: ${(props) => (props.open ? '20%' : '100%')};
-  background-color: ${(props) => props.theme.colors.primary.background};
-  overflow-x: hidden;
-  padding-top: 6rem;
-  transition: left 0.1s ease-out;
-`
-const NavCloseButton = styled.button`
-  border: none;
-  background-color: transparent;
-  position: absolute;
-  top: 0.2rem;
-  right: -0.2rem;
-  padding: 2rem;
-  font-size: 2.6rem;
-  color: ${(props) => props.theme.colors.primary.text};
-`
-const NavMenu = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 2rem 0 2rem 2rem;
 `
 const NavElement = styled.div`
   font-size: 2.2rem;

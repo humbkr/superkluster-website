@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Head from '@src/components/common/Head'
 import Layout, { HeaderSize } from '@src/components/layout/Layout'
 import { PlaylistItem } from '@src/types/Playlist'
-import SimpleAudioPlayer from '@src/components/player/SimpleAudioPlayer'
+import AudioPlayer from '@src/modules/player'
 import devices from '@src/theme/breakpoints'
 import useTranslation from '@src/modules/i18n/useTranslation'
 
@@ -34,7 +34,7 @@ const Index: React.FC = () => {
       <Layout
         noLogo
         headerContent={(
-          <BandName>
+          <BandName data-testid="home-bandname">
             <picture>
               <source
                 srcSet={require('@public/images/logo-image.png?webp')}
@@ -69,14 +69,14 @@ const Index: React.FC = () => {
         )}
         headerSize={HeaderSize.Wide}
       >
-        <FatCore>
+        <FatCore data-testid="home-fatcore">
           <H2>{t('home.tagline')}</H2>
         </FatCore>
-        <Music>
+        <Music data-testid="home-music">
           <Description>{t('home.bandDescription')}</Description>
           <DemoText>{t('home.playerText')}</DemoText>
           <PlayerWrapper>
-            <SimpleAudioPlayer playlist={playlist} />
+            <AudioPlayer playlist={playlist} />
           </PlayerWrapper>
         </Music>
       </Layout>

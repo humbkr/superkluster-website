@@ -15,7 +15,7 @@ const Link: React.FC<Props> = ({
 }) => (
   <NextLink href={href} as={as} passHref={passHref}>
     {/* eslint-disable-next-line react/jsx-props-no-spreading,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-    <a {...props} onClick={onClick}>
+    <a {...props} onClick={onClick} data-testid="link">
       {children}
     </a>
   </NextLink>

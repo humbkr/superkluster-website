@@ -2,6 +2,8 @@ import { serialize, parse } from 'cookie'
 import { CookieOptions, UserPreferences } from '@src/modules/gdpr/types'
 
 const COOKIE_NAME_PREFIX = 'gdpr-'
+// In seconds.
+const LEGAL_MAX_AGE = 31536000
 
 // By default no cookies except the required ones must be set.
 const DEFAULT_VALUES: UserPreferences = {
@@ -17,7 +19,17 @@ const DEFAULT_VALUES: UserPreferences = {
   marketing: false,
 }
 
-const serializeCookie = (
+/**
+ * Returns a string usable in a cookie.
+ *
+ * @param name
+ *   The cookie name.
+ * @param value
+ *   The cookie value.
+ * @param options
+ *   The cookie options.
+ */
+const serializeForCookie = (
   name: string,
   value: any,
   options: CookieOptions = {}
@@ -25,22 +37,26 @@ const serializeCookie = (
   const stringValue = typeof value === 'object' ? `${JSON.stringify(value)}` : String(value)
   const cookieOptions = { ...options }
 
-  if ('maxAge' in cookieOptions) {
-    cookieOptions.expires = new Date(Date.now() + options.maxAge)
-    cookieOptions.maxAge /= 1000
+  if (cookieOptions.maxAge && !cookieOptions.expires) {
+    // For compatibility.
+    const now = new Date()
+    cookieOptions.expires = new Date(now.getTime() + 1000 * options.maxAge)
   }
 
-  return serialize(name, String(stringValue), options)
+  return serialize(name, String(stringValue), cookieOptions)
 }
 
-const removeCookie = (name: string) => {
-  serializeCookie(name, '', {
-    expires: new Date(1970, 1, 1, 0, 0, 1),
-    maxAge: 0,
-  })
-}
+/**
+ * Returns a string usable in a cookie that removes its value and mark it as expired
+ *
+ * @param name Name of the cookie to reset.
+ */
+const resetCookie = (name: string) => serializeForCookie(name, '', {
+  expires: new Date(1970),
+  maxAge: 0,
+})
 
-const getUserPreferences = () => {
+const getUserPreferences = (): UserPreferences => {
   // Default values
   let preferences: UserPreferences = { ...DEFAULT_VALUES }
 
@@ -48,7 +64,13 @@ const getUserPreferences = () => {
   if (document) {
     const cookies = parse(document.cookie)
     if (cookies[`${COOKIE_NAME_PREFIX}consent`]) {
-      preferences = JSON.parse(cookies[`${COOKIE_NAME_PREFIX}consent`])
+      preferences = {
+        hasSetPreferences: !!cookies[`${COOKIE_NAME_PREFIX}consent`],
+        necessary: !!cookies[`${COOKIE_NAME_PREFIX}necessary`],
+        preferences: !!cookies[`${COOKIE_NAME_PREFIX}preferences`],
+        statistics: !!cookies[`${COOKIE_NAME_PREFIX}statistics`],
+        marketing: !!cookies[`${COOKIE_NAME_PREFIX}marketing`],
+      }
     }
   }
 
@@ -60,43 +82,43 @@ const setUserPreferences = (preferences: UserPreferences) => {
   // One global cookie for use on client side.
   // One cookie per preference so they can be easily used in GTM.
   if (document) {
-    document.cookie = serializeCookie(
+    document.cookie = serializeForCookie(
       `${COOKIE_NAME_PREFIX}consent`,
       preferences,
       {
-        maxAge: 31536000,
+        maxAge: LEGAL_MAX_AGE,
         path: '/',
       }
     )
-    document.cookie = serializeCookie(
+    document.cookie = serializeForCookie(
       `${COOKIE_NAME_PREFIX}necessary`,
       preferences.necessary,
       {
-        maxAge: 31536000,
+        maxAge: LEGAL_MAX_AGE,
         path: '/',
       }
     )
-    document.cookie = serializeCookie(
+    document.cookie = serializeForCookie(
       `${COOKIE_NAME_PREFIX}preferences`,
       preferences.preferences,
       {
-        maxAge: 31536000,
+        maxAge: LEGAL_MAX_AGE,
         path: '/',
       }
     )
-    document.cookie = serializeCookie(
+    document.cookie = serializeForCookie(
       `${COOKIE_NAME_PREFIX}statistics`,
       preferences.statistics,
       {
-        maxAge: 31536000,
+        maxAge: LEGAL_MAX_AGE,
         path: '/',
       }
     )
-    document.cookie = serializeCookie(
+    document.cookie = serializeForCookie(
       `${COOKIE_NAME_PREFIX}marketing`,
       preferences.marketing,
       {
-        maxAge: 31536000,
+        maxAge: LEGAL_MAX_AGE,
         path: '/',
       }
     )
@@ -104,7 +126,8 @@ const setUserPreferences = (preferences: UserPreferences) => {
 }
 
 export default {
-  removeCookie,
+  serializeForCookie,
+  resetCookie,
   COOKIE_NAME_PREFIX,
   DEFAULT_VALUES,
   getUserPreferences,

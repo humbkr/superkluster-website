@@ -13,10 +13,10 @@ const Button: React.FC<Props & React.HTMLProps<HTMLButtonElement>> = ({
   children,
   ...props
 }) => (
-  // eslint-disable-next-line react/jsx-props-no-spreading
   <Container
     type={submitButton ? 'submit' : 'button'}
     disabled={loading}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     {loading && <Loader size={20} />}

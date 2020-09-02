@@ -10,6 +10,7 @@ const SocialLinks: React.FC = () => (
       id="extlink-bandcamp"
       target="_blank"
       rel="noopener nofollow noreferrer"
+      data-testid="social-link-bandcamp"
     >
       <svg
         className="social social-bandcamp first"
@@ -25,6 +26,7 @@ const SocialLinks: React.FC = () => (
       id="extlink-facebook"
       target="_blank"
       rel="noopener nofollow noreferrer"
+      data-testid="social-link-facebook"
     >
       <svg
         className="social social-facebook"
@@ -40,6 +42,7 @@ const SocialLinks: React.FC = () => (
       id="extlink-instagram"
       target="_blank"
       rel="noopener nofollow noreferrer"
+      data-testid="social-link-instagram"
     >
       <svg
         className="social social-instagram"

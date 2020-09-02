@@ -23,9 +23,11 @@ const CookiesBanner: React.FC<{
 
   useEffect(() => {
     const userPrefs = gdpr.getUserPreferences()
-    if (userPrefs.hasSetPreferences) {
+
+    if (userPrefs?.hasSetPreferences) {
       setUserPreferences(userPrefs)
     } else {
+      // Set values to display to be all checked.
       setUserPreferences({
         hasSetPreferences: false,
         necessary: true,
@@ -74,10 +76,16 @@ const CookiesBanner: React.FC<{
     <Container>
       <p>{t('gdpr.text')}</p>
       <Actions>
-        <DenyButton type="button" onClick={onDenyPress}>
+        <DenyButton
+          type="button"
+          onClick={onDenyPress}
+          data-testid="gdpr-banner-deny-button"
+        >
           {t('gdpr.deny')}
         </DenyButton>
-        <Button onClick={onAcceptPress}>{t('gdpr.allow')}</Button>
+        <Button onClick={onAcceptPress} data-testid="gdpr-banner-accept-button">
+          {t('gdpr.allow')}
+        </Button>
       </Actions>
     </Container>
   )

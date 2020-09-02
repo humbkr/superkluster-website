@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
     <Container>
       <Content>
         <First>
-          <picture>
+          <picture data-testid="footer-band-logo">
             <source
               srcSet={require('@public/images/logo-text-wide.png?webp')}
               type="image/webp"
@@ -126,7 +126,9 @@ const Footer: React.FC = () => {
             </FriendsList>
           </Friends>
         </Second>
-        <Third>Copyright © {new Date().getFullYear()} SuperKluster</Third>
+        <Third data-testid="footer-copyright">
+          Copyright © {new Date().getFullYear()} SuperKluster
+        </Third>
       </Content>
     </Container>
   )

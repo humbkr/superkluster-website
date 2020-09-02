@@ -1,4 +1,4 @@
-export default {
+const theme = {
   colors: {
     primary: {
       background: '#000',
@@ -22,9 +22,13 @@ export default {
 
   buttons: {
     actionButton: {
+      colorEnabled: '#000',
+      colorDisabled: '#6e6e6e',
+      colorActive: '#8B0000',
       backgroundColor: '#f5dfcc',
-      color: '#000',
       height: '3.5rem',
     },
   },
 }
+
+export default theme

@@ -1,3 +1,6 @@
+/* istanbul ignore file */
+// Nothing to test here.
+
 import React from 'react'
 import { AudioPlayerProvider } from 'react-use-audio-player'
 import AudioPlayer from './AudioPlayer'

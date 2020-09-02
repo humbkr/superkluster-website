@@ -1,15 +1,8 @@
-# Next.js project starter
-Adapt this README.md and remove this header.
-
-Manual steps you may need:  
-- Generate favicons: use https://realfavicongenerator.net/
----
-
-# Next.js
-> Next.js project
+# Superkluster.com
+> Superkluster band website.
 
 ## Development
- 
+
 ### Quick start
 
 ```bash
@@ -30,6 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - `yarn dev`: starts the development server
 - `yarn build`: builds the project for production
 - `yarn start`: starts the production server
+- `yarn test`: runs tests
 - `yarn eslint`: shows eslint warnings and errors for all source files
 - `yarn lint-check`: shows output of prettier-eslint for all source files
 - `yarn lint`: runs prettier-eslint on all source files and update them

@@ -1,27 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useAudioPosition } from 'react-use-audio-player'
-
-/**
- * Format time to '00:00'.
- *
- * @param seconds number
- *   Duration in seconds.
- */
-const formatTime = (seconds: number) => {
-  const floored = Math.floor(seconds)
-  let from = 14
-  let length = 5
-  if (floored >= 3600) {
-    from = 11
-    length = 8
-  }
-
-  return new Date(floored * 1000).toISOString().substr(from, length)
-}
+import { formatDuration } from './utils'
 
 const Time: React.FC<{
-  remaining: boolean
+  remaining?: boolean
 }> = ({ remaining = false }) => {
   const { position, duration } = useAudioPosition({ highRefreshRate: true })
 
@@ -33,17 +16,21 @@ const Time: React.FC<{
 
   return (
     <Container>
-      {remaining && `-${formatTime(remainingSeconds)}`}
-      {!remaining && `${formatTime(elapsed)} / ${formatTime(duration)}`}
+      {remaining && `-${formatDuration(remainingSeconds, duration >= 3600)}`}
+      {!remaining
+        && `${formatDuration(elapsed, duration >= 3600)} / ${formatDuration(
+          duration
+        )}`}
     </Container>
   )
 }
 
 export default Time
+export { formatDuration }
 
 const Container = styled.div`
   font-size: 14px;
   line-height: 18px;
-  color: #686868;
+  color: ${(props) => props.theme.timer.color};
   flex-shrink: 0;
 `

@@ -1,3 +1,6 @@
+/* istanbul ignore file */
+// As this component relies on next/head, it's difficult to test it using react-testing-library.
+
 import React from 'react'
 import Header from 'next/head'
 

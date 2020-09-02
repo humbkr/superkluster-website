@@ -29,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       subject = 'Gig inquiry'
       break
     case 'info':
-      subject = 'Gig inquiry'
+      subject = 'Information'
       break
     default:
       subject = 'Other'

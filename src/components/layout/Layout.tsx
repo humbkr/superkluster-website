@@ -22,7 +22,9 @@ const Layout: React.FC<{
   <Container>
     <Header noLogo={noLogo} />
     <ContentHeader>{headerContent}</ContentHeader>
-    <Content size={headerSize}>{children}</Content>
+    <Content size={headerSize} data-testid="layout-content">
+      {children}
+    </Content>
     <Footer />
   </Container>
 )

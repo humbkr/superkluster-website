@@ -1,3 +1,6 @@
+/* istanbul ignore file */
+// Testing would need to mock an entire website for crawling.
+
 import { NextApiRequest, NextApiResponse } from 'next'
 import { SitemapStream, streamToPromise, EnumChangefreq } from 'sitemap'
 import { createGzip } from 'zlib'

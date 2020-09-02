@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import React from 'react'
 import 'normalize.css'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'

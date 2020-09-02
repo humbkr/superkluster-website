@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import React from 'react'
 import Document, {
   Html, Head, Main, NextScript,

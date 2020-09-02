@@ -16,8 +16,8 @@ const Contact: React.FC = () => {
 
   const { t } = useTranslation()
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleFormSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
 
     if (!email || !subject || !text) {
       notifications.show(t('contact.form.messages.errorRequired'))
@@ -30,25 +30,30 @@ const Contact: React.FC = () => {
 
     // Else send the email request.
     setIsSending(true)
-    const response = await fetch(paths.api.sendMail, {
-      method: 'POST',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, subject, text }),
-    })
 
-    if (response.status === 200) {
-      notifications.show(t('contact.form.messages.messageSent'))
-      setEmail('')
-      setSubject('')
-      setText('')
-    } else {
+    try {
+      const response = await fetch(paths.api.sendMail, {
+        method: 'POST',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, subject, text }),
+      })
+
+      if (response.status === 200) {
+        notifications.show(t('contact.form.messages.messageSent'))
+        setEmail('')
+        setSubject('')
+        setText('')
+      } else {
+        notifications.show(t('contact.form.messages.errorAPI'))
+      }
+      setIsSending(false)
+    } catch (e) {
       notifications.show(t('contact.form.messages.errorAPI'))
     }
-    setIsSending(false)
   }
 
   return (
@@ -59,14 +64,14 @@ const Contact: React.FC = () => {
       />
       <Layout
         headerContent={(
-          <TitleSection>
-            <H1>Contact</H1>
+          <TitleSection data-testid="contact-title">
+            <H1>{t('contact.pageTitle')}</H1>
           </TitleSection>
         )}
       >
         <FormSection>
           <FormWrapper>
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleFormSubmit} data-testid="contact-form">
               <FormElement>
                 <Input
                   type="email"
@@ -74,6 +79,7 @@ const Contact: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.currentTarget.value)}
                   placeholder={t('contact.form.fields.email')}
+                  data-testid="contact-form-email"
                   required
                 />
               </FormElement>
@@ -82,17 +88,25 @@ const Contact: React.FC = () => {
                   required
                   onChange={(e) => setSubject(e.currentTarget.value)}
                   value={subject}
+                  data-testid="contact-form-subject"
                 >
-                  <option value="" disabled>
+                  <option
+                    value=""
+                    disabled
+                    data-testid="contact-form-subject-default"
+                  >
                     {t('contact.form.fields.subject.placeholder')}
                   </option>
-                  <option value="gig">
+                  <option value="gig" data-testid="contact-form-subject-gig">
                     {t('contact.form.fields.subject.gig')}
                   </option>
-                  <option value="info">
+                  <option value="info" data-testid="contact-form-subject-info">
                     {t('contact.form.fields.subject.info')}
                   </option>
-                  <option value="other">
+                  <option
+                    value="other"
+                    data-testid="contact-form-subject-other"
+                  >
                     {t('contact.form.fields.subject.other')}
                   </option>
                 </Select>
@@ -103,10 +117,15 @@ const Contact: React.FC = () => {
                   onChange={(e) => setText(e.currentTarget.value)}
                   value={text}
                   placeholder={t('contact.form.fields.text')}
+                  data-testid="contact-form-text"
                 />
               </FormElement>
               <FormActions>
-                <Button loading={isSending} submitButton>
+                <Button
+                  loading={isSending}
+                  submitButton
+                  data-testid="contact-form-submit"
+                >
                   {t('contact.form.actions.send')}
                 </Button>
               </FormActions>

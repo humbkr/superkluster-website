@@ -7,14 +7,18 @@ import useTranslation from '@src/modules/i18n/useTranslation'
 const NavMenuOverlay: React.FC<{
   isOpen: boolean
   closeMenu: () => void
-}> = ({ isOpen = true, closeMenu }) => {
+}> = ({ isOpen, closeMenu }) => {
   const { t } = useTranslation()
 
   return (
-    <NavOverlay open={isOpen}>
+    <NavOverlay
+      open={isOpen}
+      data-testid={`nav-overlay-${isOpen ? 'opened' : 'closed'}`}
+    >
       <NavCloseButton
         onClick={closeMenu}
         aria-label={t('navigation.main.closeButton')}
+        data-testid="nav-overlay-close-button"
       >
         <i className="icon-cancel" />
       </NavCloseButton>
