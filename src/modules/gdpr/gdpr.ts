@@ -61,7 +61,7 @@ const getUserPreferences = (): UserPreferences => {
   let preferences: UserPreferences = { ...DEFAULT_VALUES }
 
   // Read cookies and get values.
-  if (document) {
+  if (typeof window !== 'undefined') {
     const cookies = parse(document.cookie)
     if (cookies[`${COOKIE_NAME_PREFIX}consent`]) {
       preferences = {
@@ -81,7 +81,7 @@ const setUserPreferences = (preferences: UserPreferences) => {
   // Set cookies that will expire in one year, per legal requirements.
   // One global cookie for use on client side.
   // One cookie per preference so they can be easily used in GTM.
-  if (document) {
+  if (typeof window !== 'undefined') {
     document.cookie = serializeForCookie(
       `${COOKIE_NAME_PREFIX}consent`,
       preferences,
