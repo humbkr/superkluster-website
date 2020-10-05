@@ -47,9 +47,6 @@ const Header: React.FC<{
         <Link href={paths.homepage}>
           <NavElement>{t('navigation.main.home')}</NavElement>
         </Link>
-        <Link href={paths.concerts}>
-          <NavElement>{t('navigation.main.live')}</NavElement>
-        </Link>
         <Link href={paths.contact}>
           <NavElement>{t('navigation.main.contact')}</NavElement>
         </Link>

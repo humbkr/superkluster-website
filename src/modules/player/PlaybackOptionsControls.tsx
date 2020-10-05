@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import Repeat from './icons/Repeat'
 import Shuffle from './icons/Shuffle'
 import { RepeatState } from './types'
+import { PlayerOptionsContext } from './context'
 
 const getRepeatStateLabel = (repeatState: RepeatState): string => {
   switch (repeatState) {
@@ -24,34 +25,42 @@ const PlaybackOptionsControls: React.FC<{
   displayShuffle: boolean
 }> = ({
   repeatState, onRepeat, shuffleState, onShuffle, displayShuffle,
-}) => (
-  <Container data-testid={`player-repeat-${getRepeatStateLabel(repeatState)}`}>
-    <PlaybackOptionButton
-      type="button"
-      onClick={onRepeat}
-      aria-label="Repeat"
-      data-testid="player-repeat-button"
-    >
-      <Repeat
-        size={18}
-        active={repeatState !== RepeatState.norepeat}
-        repeatOne={repeatState === RepeatState.one}
-      />
-    </PlaybackOptionButton>
-    {displayShuffle && (
-      <PlaybackOptionButton
-        type="button"
-        onClick={onShuffle}
-        aria-label="Shuffle"
-        data-testid={`player-shuffle-button-${
-          shuffleState ? 'enabled' : 'disabled'
-        }`}
-      >
-        <Shuffle size={18} active={shuffleState} />
-      </PlaybackOptionButton>
-    )}
-  </Container>
-)
+}) => {
+  const playerOptions = useContext(PlayerOptionsContext)
+
+  return (
+    <Container>
+      {playerOptions.canRepeat && (
+        <PlaybackOptionButton
+          type="button"
+          onClick={onRepeat}
+          aria-label="Repeat"
+          data-testid={`player-repeat-button-${getRepeatStateLabel(
+            repeatState
+          )}`}
+        >
+          <Repeat
+            size={18}
+            active={repeatState !== RepeatState.norepeat}
+            repeatOne={repeatState === RepeatState.one}
+          />
+        </PlaybackOptionButton>
+      )}
+      {playerOptions.canShuffle && displayShuffle && (
+        <PlaybackOptionButton
+          type="button"
+          onClick={onShuffle}
+          aria-label="Shuffle"
+          data-testid={`player-shuffle-button-${
+            shuffleState ? 'enabled' : 'disabled'
+          }`}
+        >
+          <Shuffle size={18} active={shuffleState} />
+        </PlaybackOptionButton>
+      )}
+    </Container>
+  )
+}
 
 export default PlaybackOptionsControls
 

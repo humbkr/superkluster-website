@@ -3,14 +3,24 @@
 
 import React from 'react'
 import { AudioPlayerProvider } from 'react-use-audio-player'
-import AudioPlayer from './AudioPlayer'
 import { PlaylistItem } from './types'
+import PlayerWithOptions from './PlayerWithOptions'
 
 const Player: React.FC<{
   playlist: PlaylistItem[]
-}> = ({ playlist }) => (
+  canShuffle?: boolean
+  canRepeat?: boolean
+  canChangeVolume?: boolean
+}> = ({
+  playlist, canShuffle, canRepeat, canChangeVolume,
+}) => (
   <AudioPlayerProvider>
-    <AudioPlayer playlist={playlist} />
+    <PlayerWithOptions
+      playlist={playlist}
+      canShuffle={canShuffle}
+      canRepeat={canRepeat}
+      canChangeVolume={canChangeVolume}
+    />
   </AudioPlayerProvider>
 )
 

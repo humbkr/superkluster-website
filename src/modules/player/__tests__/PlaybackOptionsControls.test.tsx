@@ -29,7 +29,7 @@ describe('PlaybackOptionsControls', () => {
       </ThemeProvider>
     )
 
-    expect(screen.getByTestId('player-repeat-button')).toBeInTheDocument()
+    expect(screen.getByTestId('player-repeat-button-none')).toBeInTheDocument()
     expect(
       screen.getByTestId('player-shuffle-button-disabled')
     ).toBeInTheDocument()
@@ -48,7 +48,7 @@ describe('PlaybackOptionsControls', () => {
       </ThemeProvider>
     )
 
-    expect(screen.getByTestId('player-repeat-button')).toBeInTheDocument()
+    expect(screen.getByTestId('player-repeat-button-none')).toBeInTheDocument()
     expect(
       screen.queryByTestId('player-shuffle-button-enabled')
     ).not.toBeInTheDocument()
@@ -70,7 +70,7 @@ describe('PlaybackOptionsControls', () => {
       </ThemeProvider>
     )
 
-    userEvent.click(screen.getByTestId('player-repeat-button'))
+    userEvent.click(screen.getByTestId('player-repeat-button-none'))
     expect(mockOnRepeat).toHaveBeenCalledTimes(1)
   })
 

@@ -47,7 +47,7 @@ export const formatDuration = (
   const minutes = Math.floor(remainingSeconds / 60) % 60
   remainingSeconds -= minutes * 60
 
-  const seconds = remainingSeconds % 60
+  const seconds = Math.round(remainingSeconds) % 60
 
   // eslint-disable-next-line max-len
   const formatted = `${String(hours).padStart(2, '0')}:${String(

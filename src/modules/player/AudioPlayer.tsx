@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, {
+  useCallback, useContext, useEffect, useState,
+} from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { useAudioPlayer } from 'react-use-audio-player'
 import useDimensions from 'react-use-dimensions'
@@ -12,6 +14,8 @@ import PlaylistNavControls from './PlaylistNavControls'
 import { PlaylistItem, RepeatState } from './types'
 import PlaybackOptionsControls from './PlaybackOptionsControls'
 import theme from './theme'
+import Volume from './Volume'
+import { PlayerOptionsContext } from './context'
 
 const widthTimeFormatSwitch = 248
 
@@ -21,22 +25,53 @@ const AudioPlayer: React.FC<{
   // TODO: Test the impact on performance.
   const [ref, { width }] = useDimensions()
 
-  const [currentPlaylistPosition, setCurrentPlaylistPosition] = useState<
-    number
-  >(0)
-  const [repeat, setRepeat] = useState<RepeatState>(RepeatState.norepeat)
-  const [shuffle, setShuffle] = useState(false)
-
-  // List of already played tracks in a playlist.
-  const [shuffleList, setShuffleList] = useState<number[]>([])
-  useEffect(() => {
-    // Clean shuffle list when playlist changes.
-    setShuffleList([])
-  }, [playlist])
+  const playerOptions = useContext(PlayerOptionsContext)
 
   const {
     ready, playing, togglePlayPause, ended, load,
   } = useAudioPlayer()
+
+  const [currentPlaylistPosition, setCurrentPlaylistPosition] = useState<
+    number
+  >(0)
+  const [repeat, setRepeat] = useState<RepeatState>(RepeatState.norepeat)
+
+  const [shuffle, setShuffle] = useState<boolean>(false)
+  // List of tracks that have been played already.
+  const [shuffleList, setShuffleList] = useState<number[]>([])
+  // List of times user has pressed prev button while in random mode.
+  const [randomPrevTimes, setRandomPrevTimes] = useState<number>(0)
+
+  useEffect(() => {
+    // Reset shuffle list when playlist changes or shuffle is toggled.
+    setShuffleList([])
+    setRandomPrevTimes(0)
+  }, [playlist])
+
+  // Selects a random track in the list of tracks that have not been played yet.
+  const selectRandomTrack = useCallback(() => {
+    if (shuffleList.length === playlist.length) {
+      // Reset the shuffle history.
+      const next = Math.floor(Math.random() * Math.floor(playlist.length))
+      setShuffleList([next])
+
+      return next
+    }
+
+    // Create an array with the tracks available to choose from.
+    const availableTracks = Array.from(Array(playlist.length).keys()).filter(
+      (item) => !shuffleList.includes(item)
+    )
+    // Select a track from this array.
+    const nextPlaylistPosition = availableTracks.splice(
+      Math.floor(Math.random() * Math.floor(availableTracks.length)),
+      1
+    )[0]
+    // Add the selected track to the list of tracks already played.
+    setShuffleList([...shuffleList, nextPlaylistPosition])
+
+    return nextPlaylistPosition
+  }, [shuffleList, playlist.length])
 
   useEffect(() => {
     if (ended) {
@@ -50,9 +85,6 @@ const AudioPlayer: React.FC<{
       html5: true,
       format: playlist[currentPlaylistPosition].format ?? 'mp3',
     })
-
-    setShuffleList([...shuffleList, currentPlaylistPosition])
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ended])
 
@@ -66,9 +98,21 @@ const AudioPlayer: React.FC<{
     }
   }
 
+  const handleShuffle = () => {
+    setShuffleList(!shuffle ? [currentPlaylistPosition] : [])
+    setShuffle(!shuffle)
+  }
+
   const handlePrev = () => {
     let nextPlaylistPosition = currentPlaylistPosition - 1
-    if (nextPlaylistPosition < 0 && repeat === RepeatState.all) {
+    if (shuffle) {
+      // Play the previous track in the history of shuffled tracks.
+      // If the user continues to press prev button, this will go down the history.
+      const historyPos = shuffleList.length - (2 + randomPrevTimes)
+
+      nextPlaylistPosition = shuffleList[historyPos]
+      setRandomPrevTimes(randomPrevTimes + 1)
+    } else if (nextPlaylistPosition < 0 && repeat === RepeatState.all) {
       nextPlaylistPosition = playlist.length - 1
     }
 
@@ -86,9 +130,22 @@ const AudioPlayer: React.FC<{
     forcePlaying: boolean = false
   ) => {
     let nextPlaylistPosition = currentPlaylistPosition + 1
-    if (nextPlaylistPosition >= playlist.length && repeat === RepeatState.all) {
+    if (shuffle) {
+      if (randomPrevTimes > 0) {
+        // Go up the shuffle history.
+        const historyPos = shuffleList.length - randomPrevTimes
+        nextPlaylistPosition = shuffleList[historyPos]
+        setRandomPrevTimes(randomPrevTimes - 1)
+      } else {
+        // Select a new random track.
+        nextPlaylistPosition = selectRandomTrack()
+        setRandomPrevTimes(0)
+      }
+    } else if (
+      nextPlaylistPosition >= playlist.length
+      && repeat === RepeatState.all
+    ) {
       nextPlaylistPosition = 0
-      setShuffleList([])
     }
 
     if (nextPlaylistPosition < playlist.length) {
@@ -99,11 +156,21 @@ const AudioPlayer: React.FC<{
         format: playlist[currentPlaylistPosition].format ?? 'mp3',
       })
       setCurrentPlaylistPosition(nextPlaylistPosition)
-      setShuffleList([...shuffleList, nextPlaylistPosition])
     }
   }
 
   const PlayPauseIcon = playing ? PauseIcon : PlayIcon
+
+  const disablePrev = (!shuffle && currentPlaylistPosition === 0 && repeat !== RepeatState.all)
+    || (shuffle && currentPlaylistPosition === shuffleList[0])
+
+  const disableNext = (!shuffle
+      && currentPlaylistPosition === playlist.length - 1
+      && repeat !== RepeatState.all)
+    || (shuffle
+      && shuffleList.length === playlist.length
+      && randomPrevTimes === 0
+      && repeat !== RepeatState.all)
 
   return (
     <ThemeProvider theme={theme}>
@@ -125,7 +192,9 @@ const AudioPlayer: React.FC<{
         )}
         <Secondary>
           <SongInfo ref={ref}>
-            <SongTitle>{playlist[currentPlaylistPosition].title}</SongTitle>
+            <SongTitle data-testid="player-track-title">
+              {playlist[currentPlaylistPosition].title}
+            </SongTitle>
             <TimeIndicator>
               <Time remaining={width <= widthTimeFormatSwitch} />
             </TimeIndicator>
@@ -134,24 +203,23 @@ const AudioPlayer: React.FC<{
           <Controls>
             {playlist.length > 1 && (
               <PlaylistNavControls
-                disablePrev={
-                  currentPlaylistPosition === 0 && repeat !== RepeatState.all
-                }
-                disableNext={
-                  currentPlaylistPosition === playlist.length - 1
-                  && repeat !== RepeatState.all
-                }
+                disablePrev={disablePrev}
+                disableNext={disableNext}
                 onPrev={handlePrev}
                 onNext={handleNext}
               />
             )}
-            <PlaybackOptionsControls
-              repeatState={repeat}
-              onRepeat={handleRepeat}
-              shuffleState={shuffle}
-              onShuffle={() => setShuffle(!shuffle)}
-              displayShuffle={playlist.length > 1}
-            />
+            {playlist.length === 1 && <div />}
+            <ControlsEnd>
+              <PlaybackOptionsControls
+                repeatState={repeat}
+                onRepeat={handleRepeat}
+                shuffleState={shuffle}
+                onShuffle={handleShuffle}
+                displayShuffle={playlist.length > 1}
+              />
+              {playerOptions.canChangeVolume && <Volume />}
+            </ControlsEnd>
           </Controls>
         </Secondary>
       </Container>
@@ -213,4 +281,7 @@ const Controls = styled.div`
   display: flex;
   margin-left: -1px;
   justify-content: space-between;
+`
+const ControlsEnd = styled.div`
+  display: flex;
 `

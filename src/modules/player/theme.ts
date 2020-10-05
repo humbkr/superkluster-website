@@ -22,6 +22,11 @@ export default {
     background: '#aaa',
     progress: '#8B0000',
   },
+  volume: {
+    barColor: '#aaa',
+    barVolumeColor: '#000',
+    handleColor: '#000',
+  },
   timer: {
     color: '#686868',
   },

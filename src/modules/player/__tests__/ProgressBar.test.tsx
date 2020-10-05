@@ -26,9 +26,9 @@ describe('ProgressBar', () => {
       </ThemeProvider>
     )
 
-    expect(screen.getByTestId('player-progress-bar-status')).toHaveStyle({
-      width: '45%',
-    })
+    expect(screen.getByTestId('player-progress-bar-status')).toHaveStyle(
+      'width: 45%'
+    )
   })
 
   it('calls the seek function when clicked', () => {

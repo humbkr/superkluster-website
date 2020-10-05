@@ -9,16 +9,8 @@ import useTranslation from '@src/modules/i18n/useTranslation'
 
 const playlist: PlaylistItem[] = [
   {
-    title: 'Stoned',
-    url: '/audio/crappyDemoWithSinger/01-stoned.mp3',
-  },
-  {
-    title: 'Hard Coarse',
-    url: '/audio/crappyDemoWithSinger/02-hard-coarse.mp3',
-  },
-  {
-    title: 'Toolbox',
-    url: '/audio/crappyDemoWithSinger/03-toolbox.mp3',
+    title: 'Defects',
+    url: '/audio/demo/superkluster-defects-demo.mp3',
   },
 ]
 
@@ -122,35 +114,37 @@ const LogoText = styled.img`
 const FatCore = styled(Section)`
   height: 35rem;
   background-color: ${(props) => props.theme.colors.primary.background};
-  background-image: url('${require('@public/images/home/band-small.jpg?webp')}');
+  background-image: url('${require('@public/images/home/basses-small.jpg?webp')}');
   background-repeat: no-repeat;
   background-size: 100%;
+  background-position: center center;
   filter: grayscale(100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  text-shadow: 1px 1px 4px rgba(150, 150, 150, 1);
   
   // Safari only.
   @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
-    background-image: url('${require('@public/images/home/band-small.jpg')}');
+    background-image: url('${require('@public/images/home/basses-small.jpg')}');
   }}
 
   @media ${devices.tablet} {
-    background-image: url('${require('@public/images/home/band-medium.jpg?webp')}');
+    background-image: url('${require('@public/images/home/basses-medium.jpg?webp')}');
     height: 50rem;
     
     // Safari only.
     @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
-      background-image: url('${require('@public/images/home/band-medium.jpg')}');
+      background-image: url('${require('@public/images/home/basses-medium.jpg')}');
     }}
   }
 
   @media ${devices.laptop} {
-    background-image: url('${require('@public/images/home/band-large.jpg?webp')}');
+    background-image: url('${require('@public/images/home/basses-large.jpg?webp')}');
     
     // Safari only.
     @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
-      background-image: url('${require('@public/images/home/band-large.jpg')}');
+      background-image: url('${require('@public/images/home/basses-large.jpg')}');
     }}
   }
 `

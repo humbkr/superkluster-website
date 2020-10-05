@@ -14,3 +14,9 @@ export enum RepeatState {
 }
 
 export type PlayerTheme = typeof theme
+
+export interface AudioPlayerOptionsContext {
+  canShuffle: boolean
+  canRepeat: boolean
+  canChangeVolume: boolean
+}

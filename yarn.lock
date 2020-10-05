@@ -5851,7 +5851,7 @@ hosted-git-info@^2.1.4:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.8.tgz#7539bd4bc1e0e0a895815a2e0262420b12858488"
   integrity sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==
 
-howler@^2.1.1, howler@^2.2.0:
+howler@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/howler/-/howler-2.2.0.tgz#0e2c780997ae65ab9a1a186333031beac1c63c6b"
   integrity sha512-sGPkrAQy7jh5mNDbkRNG0F82R2HFDYNsQXBcX4smXQT0y0F4UMsa/+jXaGwWvcrajWr2tDB7JUkH7G5qSnuIyQ==
@@ -9351,7 +9351,7 @@ prop-types-exact@1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.7.2, prop-types@^15.5.6, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -9507,14 +9507,6 @@ react-dom@16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-howler@^3.7.4:
-  version "3.7.4"
-  resolved "https://registry.yarnpkg.com/react-howler/-/react-howler-3.7.4.tgz#66b4e1eb9f94cb86aa8def9d0b8afaac0ebffffc"
-  integrity sha512-cQhzgIZd8wf6drtyjGJtT/9ShfN20jSyse+dGCPL9v5erz0pdusTQqGhuqFdVkNmYWfk2TQVck5w4nHqaCCyyg==
-  dependencies:
-    howler "^2.1.1"
-    prop-types "^15.5.6"
-
 react-is@16.13.1, react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -9529,6 +9521,11 @@ react-simple-toasts@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/react-simple-toasts/-/react-simple-toasts-1.1.2.tgz#c11e6a14519b898d15036fd8bbdb801e508ea82c"
   integrity sha512-yCnGOZBnwf4V6lUQ2GnvnN2cxkIBwZx6xgG6LeWTSUJ5x/m87XmmljdeiSJCzaqfBg9Yzr/s3d0XUX2R+08B5g==
+
+react-slider@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/react-slider/-/react-slider-1.0.11.tgz#d782e3dbfee22fd314ad0fb970da74f74c7e214f"
+  integrity sha512-NQSae3kCM+on7nXrDN33afQH95HHMVYF/NwibEKsXjIVuQIs9EON8YWGYwNVy1xOPXG3ZcHWusPyA/5AqpvOoA==
 
 react-use-audio-player@1.0.1:
   version "1.0.1"

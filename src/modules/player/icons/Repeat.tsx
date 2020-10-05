@@ -32,15 +32,13 @@ const Repeat: React.FC<{
       <polyline points="7 23 3 19 7 15" />
       <path d="M21 13v2a4 4 0 0 1-4 4H3" />
       {repeatOne && (
-        <text
-          x={9}
-          y={15}
-          fontFamily="monospace"
-          fontSize="0.8em"
+        <rect
+          x="11.5"
+          y="8.5"
+          width="1"
+          height="7"
           data-testid="player-repeat-icon-one"
-        >
-          1
-        </text>
+        />
       )}
     </svg>
   )
