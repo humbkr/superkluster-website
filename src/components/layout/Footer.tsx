@@ -36,10 +36,10 @@ const Footer: React.FC = () => {
                 <Link href={paths.homepage}>{t('navigation.main.home')}</Link>
               </li>
               <li>
-                <Link href={paths.concerts}>{t('navigation.main.live')}</Link>
+                <Link href={paths.contact}>{t('navigation.main.contact')}</Link>
               </li>
               <li>
-                <Link href={paths.contact}>{t('navigation.main.contact')}</Link>
+                <Link href={paths.pro}>{t('navigation.footer.pro')}</Link>
               </li>
               <li>
                 <Link href={paths.legals}>{t('navigation.footer.legals')}</Link>

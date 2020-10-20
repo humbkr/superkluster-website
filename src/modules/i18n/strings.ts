@@ -9,6 +9,7 @@ export default {
         closeButton: 'Close navigation menu',
       },
       footer: {
+        pro: 'Pro',
         legals: 'Legals',
       },
     },
@@ -22,7 +23,7 @@ export default {
       tagline: 'we make FatCore',
       bandDescription:
         'SuperKluster: 4 musicians, 2 basses, a fat sound in your ears.',
-      playerText: 'Discover Defects, our first demo',
+      playerText: 'Discover our first 3 tracks demo',
     },
     contact: {
       metadata: {
@@ -52,6 +53,25 @@ export default {
         },
       },
     },
+    pro: {
+      metadata: {
+        title: 'SuperKluster | Pro',
+        description: 'Resources: rider, photos, ...',
+      },
+      pageTitle: 'Pro',
+      rider: 'Rider',
+      demo: {
+        title: 'Demo',
+        download: 'Download the demo (MP3 256 kb/s)',
+      },
+    },
+    legals: {
+      metadata: {
+        title: 'SuperKluster | Legals',
+        description: 'Legals.',
+      },
+      pageTitle: 'Mentions légales',
+    },
     footer: {
       navTitle: 'Navigation',
       friends: 'Friends',
@@ -73,6 +93,7 @@ export default {
         closeButton: 'Fermer le menu de navigation',
       },
       footer: {
+        pro: 'Pro',
         legals: 'Mentions légales',
       },
     },
@@ -85,7 +106,7 @@ export default {
       tagline: 'we make FatCore',
       bandDescription:
         'SuperKluster: quatre musiciens, deux basses, du gros son dans tes oreilles.',
-      playerText: 'Découvrez Defects, notre première démo',
+      playerText: 'Découvrez notre première démo 3 titres',
     },
     contact: {
       metadata: {
@@ -115,6 +136,25 @@ export default {
           messageSent: '\u2714 Votre message a bien été envoyé',
         },
       },
+    },
+    pro: {
+      metadata: {
+        title: 'SuperKluster | Pro',
+        description: 'Ressources: fiche technique, photos, ...',
+      },
+      pageTitle: 'Pro',
+      rider: 'Fiche technique',
+      demo: {
+        title: 'Démo',
+        download: 'Télécharger la démo (MP3 256 kb/s)',
+      },
+    },
+    legals: {
+      metadata: {
+        title: 'SuperKluster | Mentions légales',
+        description: 'Mentions légales.',
+      },
+      pageTitle: 'Mentions légales',
     },
     footer: {
       navTitle: 'Navigation',

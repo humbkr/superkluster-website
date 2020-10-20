@@ -9527,10 +9527,10 @@ react-slider@^1.0.11:
   resolved "https://registry.yarnpkg.com/react-slider/-/react-slider-1.0.11.tgz#d782e3dbfee22fd314ad0fb970da74f74c7e214f"
   integrity sha512-NQSae3kCM+on7nXrDN33afQH95HHMVYF/NwibEKsXjIVuQIs9EON8YWGYwNVy1xOPXG3ZcHWusPyA/5AqpvOoA==
 
-react-use-audio-player@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-use-audio-player/-/react-use-audio-player-1.0.1.tgz#37a595993138d74fc648533d09c8c7b33e95416f"
-  integrity sha512-yqmcgCVQrHNNjk/BhIbkGkbOreE4KVmEKEnAvJCmokOVAIs3gCfQPvrdvH/ISEzYD47SCpdoFteEq0Eh28R9XA==
+react-use-audio-player@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-use-audio-player/-/react-use-audio-player-1.2.2.tgz#bbd8d61be7a9a5d3e7897899524081e9d83a7e0e"
+  integrity sha512-PZ8139H+rR6u3C3kggEcTUt7XGBA0WicmpuroFUxCzjb4I8w04sRfPChTQ9srO7FLLGDWG/gzGPBZXviQbdrzw==
   dependencies:
     howler "^2.2.0"
 

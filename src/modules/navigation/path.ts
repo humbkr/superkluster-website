@@ -1,7 +1,8 @@
 const homepage = '/'
-const concerts = '/'
+const concerts = '/live'
 const contact = '/contact'
-const legals = '/'
+const pro = '/pro'
+const legals = '/legals'
 
 const api = {
   sendMail: '/api/sendmail',
@@ -24,6 +25,7 @@ export default {
   homepage,
   concerts,
   contact,
+  pro,
   legals,
 
   api,

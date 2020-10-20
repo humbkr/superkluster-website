@@ -22,16 +22,16 @@ const Layout: React.FC<{
   <Container>
     <Header noLogo={noLogo} />
     <ContentHeader>{headerContent}</ContentHeader>
-    <Content size={headerSize} data-testid="layout-content">
-      {children}
-    </Content>
+    <ContentWrapper size={headerSize} data-testid="layout-content">
+      <Content>{children}</Content>
+    </ContentWrapper>
     <Footer />
   </Container>
 )
 
 export default Layout
 
-const Container = styled.article`
+const Container = styled.div`
   max-width: ${deviceSizes.desktop};
   height: 100vh;
   margin: 0 auto;
@@ -39,7 +39,7 @@ const Container = styled.article`
   overflow-y: auto;
   perspective: 2px;
 `
-const Section = styled.section`
+const Section = styled.div`
   position: relative;
 `
 const Parallax = styled(Section)`
@@ -104,10 +104,13 @@ const ContentHeader = styled(Parallax)`
     }
   }
 `
-const Content = styled.div`
+const ContentWrapper = styled.div`
   margin-top: ${(props) => (props.size === HeaderSize.Wide ? '0' : '-30vh')};
 
   @media ${devices.tablet} {
     margin-top: ${(props) => (props.size === HeaderSize.Wide ? '0' : '-40vh')};
   }
+`
+const Content = styled.article`
+  position: relative;
 `

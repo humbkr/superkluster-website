@@ -123,6 +123,7 @@ const StyledThumb = styled.div`
 const StyledTrack = styled.div`
   top: 0;
   bottom: 0;
+  right: 0;
   background: ${(props) => (props.index === 1
     ? props.theme.volume.barColor
     : props.theme.volume.barVolumeColor)};

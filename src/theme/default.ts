@@ -8,6 +8,7 @@ const theme = {
       background: '#551e2f',
       text: '#fff',
     },
+    links: '#f34365',
   },
 
   layout: {

@@ -10,7 +10,18 @@ import useTranslation from '@src/modules/i18n/useTranslation'
 const playlist: PlaylistItem[] = [
   {
     title: 'Defects',
-    url: '/audio/demo/superkluster-defects-demo.mp3',
+    url:
+      'https://static.superkluster.com/audio/demo2020/superkluster-01-defects.mp3',
+  },
+  {
+    title: 'Exploiters',
+    url:
+      'https://static.superkluster.com/audio/demo2020/superkluster-02-exploiters.mp3',
+  },
+  {
+    title: 'My Mindfield',
+    url:
+      'https://static.superkluster.com/audio/demo2020/superkluster-03-my-mindfield.mp3',
   },
 ]
 
