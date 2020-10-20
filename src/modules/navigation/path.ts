@@ -21,6 +21,8 @@ const friendsMuffDiver = 'https://www.facebook.com/muffd1verband/'
 const friendsSPCustom = 'http://sp-custom.com/'
 const friendsNewtt = 'https://www.facebook.com/NEwTTband/'
 
+const licence = 'https://creativecommons.org/licenses/by-nc-nd/4.0/'
+
 export default {
   homepage,
   concerts,
@@ -42,4 +44,6 @@ export default {
   friendsMuffDiver,
   friendsSPCustom,
   friendsNewtt,
+
+  licence,
 }

@@ -6,6 +6,7 @@ import { PlaylistItem } from '@src/types/Playlist'
 import AudioPlayer from '@src/modules/player'
 import devices from '@src/theme/breakpoints'
 import useTranslation from '@src/modules/i18n/useTranslation'
+import { paths } from '@src/modules/navigation'
 
 const playlist: PlaylistItem[] = [
   {
@@ -81,6 +82,16 @@ const Index: React.FC = () => {
           <PlayerWrapper>
             <AudioPlayer playlist={playlist} />
           </PlayerWrapper>
+          <DemoDescription>
+            Made with love in Toulouse, France / Mixed & mastered by Frederic
+            Badia / Produced by Superkluster
+          </DemoDescription>
+          <Licence href={paths.licence} target="_blank" rel="noreferrer">
+            <CCAtribution />
+            <CCNonCommercial />
+            <CCNoDerivatives />
+            <LicenceLink>CC BY-NC-ND</LicenceLink>
+          </Licence>
         </Music>
       </Layout>
     </>
@@ -240,4 +251,37 @@ const PlayerWrapper = styled.div`
   @media ${devices.tablet} {
     width: 90%;
   }
+`
+const DemoDescription = styled.p`
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  color: #8d888c;
+`
+const Licence = styled.a`
+  color: #8d888c;
+  margin-top: 1rem;
+  text-decoration: none;
+  
+  > span {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background-image: url('${require('@public/images/CC-strip.png')}');
+    background-repeat: no-repeat;
+    background-size: 65px 13px;
+    margin: 0 1px -3px;
+  }
+`
+const CCAtribution = styled.span`
+  background-position: 0 0;
+`
+const CCNonCommercial = styled.span`
+  background-position: -13px 0;
+`
+const CCNoDerivatives = styled.span`
+  background-position: -26px 0;
+`
+const LicenceLink = styled.div`
+  margin-left: 0.5rem;
+  display: inline;
 `
