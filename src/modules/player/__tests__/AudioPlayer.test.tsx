@@ -276,6 +276,10 @@ describe('AudioPlayer', () => {
   })
 
   describe('Repeat', () => {
+    afterEach(() => {
+      mockRUAP.useAudioPlayer.mockReturnValue(mockUseAudioPlayerDefaultValue)
+    })
+
     it('does not disable prev button if the first track of the playlist is playing but repeat all is active', () => {
       render(
         <ThemeProvider theme={theme}>
@@ -391,9 +395,44 @@ describe('AudioPlayer', () => {
       userEvent.click(screen.getByTestId('player-prev-button'))
       expect(screen.getByText(mockPlaylist[2].title)).toBeInTheDocument()
     })
+
+    it('repeat the same track when repeat one is enabled and track ends', () => {
+      const { rerender } = render(
+        <ThemeProvider theme={theme}>
+          <AudioPlayer playlist={mockPlaylist} />
+        </ThemeProvider>
+      )
+
+      // Enable repeat one.
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
+      userEvent.click(screen.getByTestId('player-repeat-button-all'))
+      expect(screen.getByTestId('player-repeat-button-one')).toBeInTheDocument()
+
+      mockRUAP.useAudioPlayer.mockReturnValue({
+        ready: false,
+        playing: true,
+        togglePlayPause: mockTogglePlayPause,
+        // Simulate track just ended.
+        ended: true,
+        load: mockLoad,
+        volume: mockVolume,
+      })
+
+      rerender(
+        <ThemeProvider theme={theme}>
+          <AudioPlayer playlist={mockPlaylist} />
+        </ThemeProvider>
+      )
+
+      expect(screen.getByText(mockPlaylist[0].title)).toBeInTheDocument()
+    })
   })
 
   describe('shuffle', () => {
+    afterEach(() => {
+      mockRUAP.useAudioPlayer.mockReturnValue(mockUseAudioPlayerDefaultValue)
+    })
+
     it('toggles between an enabled / disabled state for the shuffle button when the shuffle button is pressed', () => {
       render(
         <ThemeProvider theme={theme}>

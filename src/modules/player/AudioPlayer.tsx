@@ -48,6 +48,21 @@ const AudioPlayer: React.FC<{
     setRandomPrevTimes(0)
   }, [playlist])
 
+  useEffect(() => {
+    if (ended) {
+      handleNext(null, true)
+      return
+    }
+
+    // Load the first audio asynchronously to speed-up page load.
+    load({
+      src: playlist[currentPlaylistPosition].url,
+      html5: true,
+      format: playlist[currentPlaylistPosition].format ?? 'mp3',
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ended])
+
   // Selects a random track in the list of tracks that have not been played yet.
   const selectRandomTrack = useCallback(() => {
     if (shuffleList.length === playlist.length) {
@@ -72,21 +87,6 @@ const AudioPlayer: React.FC<{
 
     return nextPlaylistPosition
   }, [shuffleList, playlist.length])
-
-  useEffect(() => {
-    if (ended) {
-      handleNext(null, true)
-      return
-    }
-
-    // Load the first audio asynchronously to speed-up page load.
-    load({
-      src: playlist[currentPlaylistPosition].url,
-      html5: true,
-      format: playlist[currentPlaylistPosition].format ?? 'mp3',
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ended])
 
   const handleRepeat = () => {
     if (playlist.length > 1) {
@@ -130,6 +130,14 @@ const AudioPlayer: React.FC<{
     forcePlaying: boolean = false
   ) => {
     let nextPlaylistPosition = currentPlaylistPosition + 1
+
+    // Repeat one cases.
+    if (repeat === RepeatState.one && forcePlaying) {
+      // Track ended naturally, repeat same track.
+      togglePlayPause()
+      return
+    }
+
     if (shuffle) {
       if (randomPrevTimes > 0) {
         // Go up the shuffle history.
@@ -142,6 +150,7 @@ const AudioPlayer: React.FC<{
         setRandomPrevTimes(0)
       }
     } else if (
+      // When repeat all, loop playlist.
       nextPlaylistPosition >= playlist.length
       && repeat === RepeatState.all
     ) {

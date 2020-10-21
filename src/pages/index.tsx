@@ -80,7 +80,7 @@ const Index: React.FC = () => {
           <Description>{t('home.bandDescription')}</Description>
           <DemoText>{t('home.playerText')}</DemoText>
           <PlayerWrapper>
-            <AudioPlayer playlist={playlist} />
+            <AudioPlayer playlist={playlist} canChangeVolume={false} />
           </PlayerWrapper>
           <DemoDescription>
             Made with love in Toulouse, France / Mixed & mastered by Frederic
