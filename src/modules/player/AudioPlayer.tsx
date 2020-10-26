@@ -140,12 +140,13 @@ const AudioPlayer: React.FC<{
 
     if (shuffle) {
       if (randomPrevTimes > 0) {
-        // Go up the shuffle history.
+        // User has previously gone back in the shuffle history list, play the next track that is
+        // in the history list.
         const historyPos = shuffleList.length - randomPrevTimes
         nextPlaylistPosition = shuffleList[historyPos]
         setRandomPrevTimes(randomPrevTimes - 1)
       } else {
-        // Select a new random track.
+        // We are not browsing any shuffle history, select a new random track.
         nextPlaylistPosition = selectRandomTrack()
         setRandomPrevTimes(0)
       }
@@ -157,7 +158,10 @@ const AudioPlayer: React.FC<{
       nextPlaylistPosition = 0
     }
 
-    if (nextPlaylistPosition < playlist.length) {
+    if (
+      (shuffle && repeat === RepeatState.all)
+      || nextPlaylistPosition < playlist.length
+    ) {
       load({
         src: playlist[nextPlaylistPosition].url,
         autoplay: forcePlaying || playing,
