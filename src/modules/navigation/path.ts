@@ -3,8 +3,9 @@ const concerts = '/live'
 const contact = '/contact'
 const pro = '/pro'
 const legals = '/legals'
+const hiring = 'wearehiring'
 
-const api = {
+export const api = {
   sendMail: '/api/sendmail',
 }
 
@@ -29,6 +30,7 @@ export default {
   contact,
   pro,
   legals,
+  hiring,
 
   api,
 

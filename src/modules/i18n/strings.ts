@@ -82,6 +82,13 @@ export default {
       allow: 'Accept',
       deny: 'Deny',
     },
+    hiring: {
+      metadata: {
+        title: 'SuperKluster | We are hiring!',
+        description: 'Superkluster is looking for a new singer',
+      },
+      pageTitle: 'Superkluster is hiring!',
+    },
   },
   fr: {
     navigation: {
@@ -165,6 +172,13 @@ export default {
         "Ce site utilise des cookies dans le but de récolter des données statistiques (nombre de visites, pages vues, ...) Nous n'utilisons pas vos données à des fins marketing.",
       allow: 'Accepter',
       deny: 'Refuser',
+    },
+    hiring: {
+      metadata: {
+        title: 'SuperKluster | Nous recrutons !',
+        description: 'Superkluster cherche son prochain chanteur',
+      },
+      pageTitle: 'Superkluster recrute !',
     },
   },
 }
